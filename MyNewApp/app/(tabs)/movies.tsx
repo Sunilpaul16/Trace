@@ -3,8 +3,8 @@ import React from 'react';
 
 const Movies = () => {
   return (
-    <View>
-      <Text>Movies</Text>
+    <View className="flex-1 items-center justify-center bg-slate-400">
+      <Text className="text-3xl">Movies</Text>
     </View>
   );
 };

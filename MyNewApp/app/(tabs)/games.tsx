@@ -3,11 +3,10 @@ import React from 'react';
 
 const Games = () => {
   return (
-    <View>
-      <Text>Games are fun</Text>
+    <View className="flex-1 items-center justify-center bg-slate-400">
+      <Text className="text-3xl">Games are fun</Text>
     </View>
   );
 };
 
 export default Games;
-
