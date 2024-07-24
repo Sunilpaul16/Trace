@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 
 const Movies = () => {
@@ -10,5 +10,3 @@ const Movies = () => {
 };
 
 export default Movies;
-
-const styles = StyleSheet.create({});
