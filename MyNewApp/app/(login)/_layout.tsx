@@ -1,12 +1,16 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text } from 'react-native';
+import React from 'react';
+import { Stack } from 'expo-router';
 
 const login = () => {
   return (
-    <View>
-      <Text>login</Text>
-    </View>
-  )
-}
+    <>
+      <Stack>
+        <Stack.Screen name="signin" options={{ headerShown: false }} />
+        <Stack.Screen name="signup" options={{ headerShown: false }} />
+      </Stack>
+    </>
+  );
+};
 
-export default login
+export default login;
