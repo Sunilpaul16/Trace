@@ -5,8 +5,8 @@ import React from 'react';
 const CustomButton = () => {
   return (
     <TouchableOpacity
-      onPress={() => router.push('/signup')}
-      className=" bg-blue-500 rounded-xl justify-center items-center h-12 "
+      onPress={() => router.push('/home')}
+      className=" bg-blue-500 rounded-xl justify-center items-center h-12 my-3 "
     >
       <Text>CustomButton</Text>
     </TouchableOpacity>
