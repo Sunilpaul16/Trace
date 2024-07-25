@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { FlatList, Image, Text, View } from 'react-native';
+import MY_API_KEY from '../../config';
 
-const API_KEY = '2c56b2c7fbad45fbeadd21e43def2158';
+const API_KEY = MY_API_KEY;
 const POPULAR_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
