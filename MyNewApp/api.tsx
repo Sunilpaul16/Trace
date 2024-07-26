@@ -27,7 +27,7 @@ export const fetchMovieDetail = async (id: any) => {
     throw error;
   }
 };
-const API = `http://127.0.0.1:3000/movies`;
+const API = `http://10.0.2.2:3000/movies`;
 
 export const getMyMovies = async () => {
   try {
@@ -38,7 +38,14 @@ export const getMyMovies = async () => {
   }
 };
 
-export const postMyMovies = async (movie: any) => {
+export interface Movie {
+  id: number;
+  title: string;
+  releaseDate: string;
+  overview: string;
+}
+
+export const postMyMovies = async (movie: Movie) => {
   try {
     const response = await fetch(API, {
       method: 'POST',
@@ -47,8 +54,12 @@ export const postMyMovies = async (movie: any) => {
       },
       body: JSON.stringify(movie)
     });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
     return await response.json();
   } catch (error) {
-    console.log('Error creating Event', error);
+    console.log('Error creating Movie', error);
+    throw error;
   }
 };

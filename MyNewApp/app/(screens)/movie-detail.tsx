@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
-import { fetchMovieDetail } from '../../api';
+import { fetchMovieDetail, postMyMovies } from '../../api';
 import CustomButton from '../../components/button';
 import { AntDesign } from '@expo/vector-icons';
 
@@ -12,6 +12,7 @@ type Movie = {
   id: number;
   title: string;
   release_date: string;
+  releaseDate: string; // Add the missing releaseDate property
   vote_average: number;
   overview: string;
   poster_path: string;
@@ -31,6 +32,18 @@ const MovieDetail = () => {
     }
   }, [id]);
 
+  const handleSaveMovie = async () => {
+    if (data) {
+      try {
+        await postMyMovies(data);
+        Alert.alert('Success', 'Movie saved to your local database');
+      } catch (error) {
+        console.error('Failed to save movie:', error);
+        Alert.alert('Error', 'Failed to save movie to your local database');
+      }
+    }
+  };
+
   return (
     <SafeAreaView className="bg-slate-700 h-full">
       <ScrollView contentContainerStyle={{ padding: 16 }}>
@@ -47,13 +60,7 @@ const MovieDetail = () => {
           ) : (
             <Text className="text-white mb-4">No poster image available</Text>
           )}
-          <CustomButton
-            title={''}
-            // icon={<AntDesign name="checkcircle" size={24} color="black" />}
-            handlePress={() => {
-              console.log('Button pressed');
-            }}
-          ></CustomButton>
+          <CustomButton title={''} handlePress={handleSaveMovie} />
           <Text className="text-xl font-bold text-white mb-2">
             Release Date: {data?.release_date}
           </Text>
