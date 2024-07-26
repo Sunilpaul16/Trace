@@ -11,6 +11,7 @@ const SignIn = () => {
       <Text className="text-4xl">Password</Text>
       <TextInput className="border-2 border-gray-300 rounded-lg p-2 my-2" />
       <CustomButton title="Sign-In" handlePress={() => router.push('/home')} />
+      <Text className="my-3">Forgot Password?</Text>
       <Text className="my-3">
         {' '}
         Don't have account?

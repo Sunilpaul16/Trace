@@ -1,4 +1,4 @@
-import { Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import React from 'react';
 
@@ -11,11 +11,12 @@ const CustomButton = ({
 }) => {
   return (
     <TouchableOpacity
-      // onPress={() => router.push('/home')}
       onPress={handlePress}
       className=" bg-blue-500 rounded-xl justify-center items-center h-12 my-3 "
     >
-      <Text>{title}</Text>
+      <View className="flex justify-center items-center">
+        <Text>{title}</Text>
+      </View>
     </TouchableOpacity>
   );
 };

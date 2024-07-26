@@ -56,7 +56,7 @@ const GetMovies = () => {
   );
 
   return (
-    <SafeAreaView className="bg-slate-700 h-full">
+    <SafeAreaView className="bg-slate-400 h-full">
       <FlatList
         data={data}
         keyExtractor={({ id }) => id.toString()}

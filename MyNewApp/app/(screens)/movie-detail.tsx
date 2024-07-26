@@ -3,6 +3,8 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { fetchMovieDetail } from '../../api';
+import CustomButton from '../../components/button';
+import { AntDesign } from '@expo/vector-icons';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -45,6 +47,15 @@ const MovieDetail = () => {
           ) : (
             <Text className="text-white mb-4">No poster image available</Text>
           )}
+          <CustomButton
+            title={''}
+            // icon={<AntDesign name="checkcircle" size={24} color="black" />}
+            handlePress={() => {
+              <AntDesign name="checkcircle" size={24} color="black" />;
+
+              console.log('Button pressed');
+            }}
+          ></CustomButton>
           <Text className="text-xl font-bold text-white mb-2">
             Release Date: {data?.release_date}
           </Text>
