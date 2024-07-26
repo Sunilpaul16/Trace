@@ -13,3 +13,17 @@ export const fetchMovies = async () => {
     return [];
   }
 };
+export const fetchMovieDetail = async (id: any) => {
+  try {
+    const response = await fetch(
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${MY_API_KEY}`
+    );
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch movie details:', error);
+    throw error;
+  }
+};
