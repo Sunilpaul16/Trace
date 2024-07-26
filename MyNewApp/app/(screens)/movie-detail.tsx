@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
-import MY_API_KEY from '../../config';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { fetchMovieDetail } from '../../api';
@@ -55,7 +54,10 @@ const MovieDetail = () => {
           <Text className="text-xl font-bold text-white mb-2">
             Runtime: {data?.runtime} mins
           </Text>
-          <Text className="text-lg text-white">{data?.overview}</Text>
+          <Text className="text-lg text-white">
+            Overview:
+            {data?.overview}
+          </Text>
         </View>
       </ScrollView>
     </SafeAreaView>

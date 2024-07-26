@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
 import { Stack } from 'expo-router';
 
@@ -19,6 +19,15 @@ const _layout = () => {
       />
       <Stack.Screen
         name="(tabs)"
+        options={{
+          headerShown: true,
+          headerStyle: {
+            backgroundColor: '#94a3b8'
+          }
+        }}
+      />
+      <Stack.Screen
+        name="(screens)"
         options={{
           headerShown: false
         }}

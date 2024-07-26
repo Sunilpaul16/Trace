@@ -18,7 +18,7 @@ type Movie = {
 
 const GetMovies = () => {
   const [data, setData] = useState<Movie[]>([]);
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
   useEffect(() => {
     const getMovies = async () => {
