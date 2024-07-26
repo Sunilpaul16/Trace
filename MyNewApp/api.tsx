@@ -27,3 +27,28 @@ export const fetchMovieDetail = async (id: any) => {
     throw error;
   }
 };
+const API = `http://127.0.0.1:3000/movies`;
+
+export const getMyMovies = async () => {
+  try {
+    const response = await fetch(API);
+    return await response.json();
+  } catch (error) {
+    console.log('Error getting Events', error);
+  }
+};
+
+export const postMyMovies = async (movie: any) => {
+  try {
+    const response = await fetch(API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(movie)
+    });
+    return await response.json();
+  } catch (error) {
+    console.log('Error creating Event', error);
+  }
+};
