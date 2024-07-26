@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import MY_API_KEY from '../../config';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useLocalSearchParams } from 'expo-router';
+import { fetchMovieDetail } from '../../api';
 
-const API_KEY = MY_API_KEY;
-const MOVIE_DETAIL_API_URL = `https://api.themoviedb.org/3/movie/1022789?api_key=${API_KEY}`;
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 type Movie = {
-  id: string;
+  id: number;
   title: string;
   release_date: string;
   vote_average: number;
@@ -17,50 +17,45 @@ type Movie = {
   backdrop_path: string;
   runtime: number;
 };
+
 const MovieDetail = () => {
   const [data, setData] = useState<Movie | null>(null);
-
-  const getMovies = async () => {
-    try {
-      const response = await fetch(MOVIE_DETAIL_API_URL);
-      const json = await response.json();
-      setData(json);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const { id } = useLocalSearchParams<{ id: string }>();
 
   useEffect(() => {
-    getMovies();
-  }, []);
+    if (id) {
+      fetchMovieDetail(id)
+        .then(json => setData(json))
+        .catch(error => console.error('Failed to fetch movie details:', error));
+    }
+  }, [id]);
 
   return (
     <SafeAreaView className="bg-slate-700 h-full">
-      <ScrollView contentContainerStyle={{}}>
-        <View className="w-full justify-center min-h-full px-4 ">
-          <Text className="text-3xl font-bold ">{data?.title}</Text>
-          {/* {data?.backdrop_path ? (
-            <Image
-              source={{ uri: `${IMAGE_BASE_URL}${data.backdrop_path}` }}
-              className="h-[300px] w-[screen.width]"
-            />
-          ) : (
-            <Text>No backdrop image available</Text>
-          )} */}
+      <ScrollView contentContainerStyle={{ padding: 16 }}>
+        <View className="bg-slate-700">
+          <Text className="text-3xl font-bold text-white mb-4">
+            {data?.title}
+          </Text>
           {data?.poster_path ? (
             <Image
               source={{ uri: `${IMAGE_BASE_URL}${data.poster_path}` }}
-              className="h-[300px] w-[200px] rounded-xl  "
+              className="h-[300px] w-[200px] rounded-xl mb-4"
               resizeMode="cover"
             />
           ) : (
-            <Text>No poster image available</Text>
+            <Text className="text-white mb-4">No poster image available</Text>
           )}
-          <Text className="text-3xl font-bold">{data?.title}</Text>
-          <Text className="text-3xl font-bold">{data?.release_date}</Text>
-          <Text className="text-3xl font-bold">{data?.vote_average}</Text>
-          <Text className="text-3xl font-bold">{data?.runtime}</Text>
-          <Text className="text-3xl font-bold">{data?.overview}</Text>
+          <Text className="text-xl font-bold text-white mb-2">
+            Release Date: {data?.release_date}
+          </Text>
+          <Text className="text-xl font-bold text-white mb-2">
+            Rating: {data?.vote_average}
+          </Text>
+          <Text className="text-xl font-bold text-white mb-2">
+            Runtime: {data?.runtime} mins
+          </Text>
+          <Text className="text-lg text-white">{data?.overview}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
