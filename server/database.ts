@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://127.0.0.1/my-app-db', {});
@@ -50,8 +50,5 @@ const Game = mongoose.model('Game', gameSchema);
 const Movie = mongoose.model('Movie', movieSchema);
 const Book = mongoose.model('Book', bookSchema);
 
-module.exports = {
-  Game,
-  Movie,
-  Book
-};
+export default Movie;
+export { Game, Book };
