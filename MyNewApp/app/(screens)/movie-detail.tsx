@@ -51,8 +51,6 @@ const MovieDetail = () => {
             title={''}
             // icon={<AntDesign name="checkcircle" size={24} color="black" />}
             handlePress={() => {
-              <AntDesign name="checkcircle" size={24} color="black" />;
-
               console.log('Button pressed');
             }}
           ></CustomButton>
