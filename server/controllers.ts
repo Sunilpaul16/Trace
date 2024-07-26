@@ -11,28 +11,6 @@ export const getMovies = async (req: Request, res: Response) => {
 };
 
 export const postMovie = async (req: Request, res: Response) => {
-  const {
-    id,
-    title,
-    release_date,
-    vote_average,
-    overview,
-    poster_path,
-    backdrop_path,
-    runtime
-  } = req.body;
-  if (
-    !id ||
-    !title ||
-    !release_date ||
-    !vote_average ||
-    !overview ||
-    !poster_path ||
-    !backdrop_path ||
-    !runtime
-  ) {
-    return res.status(400).send({ message: 'Missing data' });
-  }
   try {
     const newMovie = new Movie(req.body);
     await newMovie.save();

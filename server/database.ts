@@ -38,12 +38,13 @@ const bookSchema = new Schema({
 const movieSchema = new Schema({
   id: { type: Number },
   title: { type: String },
-  release_date: { type: Date },
+  release_date: { type: String },
   vote_average: { type: Number },
   overview: { type: String },
   poster_path: { type: String },
   backdrop_path: { type: String },
-  runtime: { type: Number }
+  runtime: { type: Number },
+  releaseDate: { type: String }
 });
 
 const Game = mongoose.model('Game', gameSchema);
