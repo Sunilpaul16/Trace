@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import { getMyMovies } from '../../api';
+import { getMyMovies } from '../../API/movieAPI';
 import { useRouter } from 'expo-router';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';

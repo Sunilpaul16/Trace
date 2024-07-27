@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
-import { fetchMovieDetail, postMyMovies } from '../../api';
+import { fetchMovieDetail, postMyMovies } from '../../API/movieAPI';
 import CustomButton from '../../components/button';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
