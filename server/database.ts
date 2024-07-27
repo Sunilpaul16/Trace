@@ -51,5 +51,6 @@ const Game = mongoose.model('Game', gameSchema);
 const Movie = mongoose.model('Movie', movieSchema);
 const Book = mongoose.model('Book', bookSchema);
 
-export default Movie;
-export { Game, Book };
+export { Movie, Book, Game };
+
+
