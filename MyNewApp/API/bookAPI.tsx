@@ -1,22 +1,23 @@
 import { MY_Book_API_KEY } from '../config';
 
 const API_KEY = MY_Book_API_KEY;
-const POPULAR_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+const POPULAR_API_URL = `https://www.googleapis.com/books/v1/volumes?q=bestsellers&maxResults=10&orderBy=relevance&key=${API_KEY}`;
 
 export const fetchBooks = async () => {
   try {
     const response = await fetch(POPULAR_API_URL);
-    const json = await response.json();
-    return json.results;
+    const result = await response.json();
+    return result.items;
   } catch (error) {
     console.error(error);
     return [];
   }
 };
+
 export const fetchBookDetail = async (id: any) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+      `https://www.googleapis.com/books/v1/volumes/${id}?key=${API_KEY}`
     );
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -39,13 +40,15 @@ export const getMyBooks = async () => {
 };
 
 export interface Book {
-  id: number;
-  title: string;
+  id: string;
   releaseDate: string;
   overview: string;
+  title: string;
+  publishedDate: string;
+  description: string;
 }
 
-export const postMyBook = async (book: Book) => {
+export const postMyBook = async (book: Book): Promise<Book> => {
   try {
     const response = await fetch(API, {
       method: 'POST',

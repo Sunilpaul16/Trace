@@ -1,4 +1,3 @@
-import { View, Text } from 'react-native';
 import { Tabs } from 'expo-router';
 import { AntDesign } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
