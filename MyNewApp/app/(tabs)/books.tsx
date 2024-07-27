@@ -7,10 +7,10 @@ import HorizontalList from '../../components/books/myBookList';
 const App = () => {
   return (
     <SafeAreaView className="bg-slate-400 h-full">
+      <GetBooks />
       <View className="bg-slate-400 h-40 border-2 border-red-600">
         <HorizontalList />
       </View>
-      <GetBooks />
     </SafeAreaView>
   );
 };

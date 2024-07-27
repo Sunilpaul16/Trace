@@ -1,11 +1,11 @@
-import { MY_Book_API_KEY } from '../config';
+import { MY_BOOK_API_KEY } from '../config';
 
-const API_KEY = MY_Book_API_KEY;
-const POPULAR_API_URL = `https://www.googleapis.com/books/v1/volumes?q=bestsellers&maxResults=10&orderBy=relevance&key=${API_KEY}`;
+const API_KEY = MY_BOOK_API_KEY;
+const POPULAR_BOOKS_API_URL = `https://www.googleapis.com/books/v1/volumes?q=bestsellers&maxResults=10&orderBy=relevance&key=${API_KEY}`;
 
 export const fetchBooks = async () => {
   try {
-    const response = await fetch(POPULAR_API_URL);
+    const response = await fetch(POPULAR_BOOKS_API_URL);
     const result = await response.json();
     return result.items;
   } catch (error) {

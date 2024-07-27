@@ -1,6 +1,6 @@
-import { MY_Movie_API_KEY } from '../config';
+import { MY_MOVIE_API_KEY } from '../config';
 
-const API_KEY = MY_Movie_API_KEY;
+const API_KEY = MY_MOVIE_API_KEY;
 const POPULAR_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 
 export const fetchMovies = async () => {
