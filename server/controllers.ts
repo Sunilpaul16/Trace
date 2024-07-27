@@ -11,7 +11,14 @@ export const getMovies = async (req: Request, res: Response) => {
 };
 
 export const postMovie = async (req: Request, res: Response) => {
+  const { id } = req.body;
+
   try {
+    const existingMovie = await Movie.findOne({ id: id });
+
+    if (existingMovie) {
+      return res.json({ message: 'Movie already exists in database' });
+    }
     const newMovie = new Movie(req.body);
     await newMovie.save();
     res.status(201).send(newMovie);
