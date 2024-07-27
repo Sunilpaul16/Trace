@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { fetchMovieDetail, postMyMovies } from '../../api';
 import CustomButton from '../../components/button';
-import { AntDesign } from '@expo/vector-icons';
 
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
@@ -12,7 +11,7 @@ type Movie = {
   id: number;
   title: string;
   release_date: string;
-  releaseDate: string; // Add the missing releaseDate property
+  releaseDate: string;
   vote_average: number;
   overview: string;
   poster_path: string;
@@ -36,10 +35,9 @@ const MovieDetail = () => {
     if (data) {
       try {
         await postMyMovies(data);
-        Alert.alert('Success', 'Movie saved to your local database');
+        console.log('Movie saved successfully');
       } catch (error) {
         console.error('Failed to save movie:', error);
-        Alert.alert('Error', 'Failed to save movie to your local database');
       }
     }
   };
@@ -60,7 +58,7 @@ const MovieDetail = () => {
           ) : (
             <Text className="text-white mb-4">No poster image available</Text>
           )}
-          <CustomButton title={''} handlePress={handleSaveMovie} />
+          <CustomButton title={'Watchlist'} handlePress={handleSaveMovie} />
           <Text className="text-xl font-bold text-white mb-2">
             Release Date: {data?.release_date}
           </Text>

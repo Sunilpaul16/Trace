@@ -34,7 +34,7 @@ export const getMyMovies = async () => {
     const response = await fetch(API);
     return await response.json();
   } catch (error) {
-    console.log('Error getting Events', error);
+    console.log('Error getting Movies', error);
   }
 };
 
