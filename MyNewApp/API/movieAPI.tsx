@@ -1,6 +1,6 @@
-import MY_API_KEY from '../config';
+import { MY_Movie_API_KEY } from '../config';
 
-const API_KEY = MY_API_KEY;
+const API_KEY = MY_Movie_API_KEY;
 const POPULAR_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
 
 export const fetchMovies = async () => {
@@ -16,7 +16,7 @@ export const fetchMovies = async () => {
 export const fetchMovieDetail = async (id: any) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${MY_API_KEY}`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
     );
     if (!response.ok) {
       throw new Error('Network response was not ok');
