@@ -3,19 +3,7 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import CustomButton from '../../components/button';
-import { fetchBookDetail, postMyBook } from '../../API/bookAPI';
-
-type Book = {
-  id: string;
-  volumeInfo: {
-    title: string;
-    publishedDate: string;
-    description: string;
-    imageLinks: {
-      thumbnail: string;
-    };
-  };
-};
+import { fetchBookDetail, postMyBook, Book } from '../../API/bookAPI';
 
 const GetBooks = () => {
   const [data, setData] = useState<Book | null>(null);
@@ -24,48 +12,70 @@ const GetBooks = () => {
   useEffect(() => {
     if (id) {
       fetchBookDetail(id)
-        .then(json => setData(json))
+        .then(json => {
+          const bookData: Book = {
+            id: json.id,
+            title: json.volumeInfo.title,
+            authors: json.volumeInfo.authors || [],
+            publishedDate: json.volumeInfo.publishedDate || '',
+            description: json.volumeInfo.description || '',
+            imageLinks: json.volumeInfo.imageLinks || { thumbnail: '' }
+          };
+          setData(bookData);
+        })
         .catch(error => console.error('Failed to fetch book details:', error));
     }
-  }, []);
+  }, [id]);
 
-  // const handleSaveBook = async () => {
-  //   if (data) {
-  //     try {
-  //       await postMyBook(data);
-  //       console.log('Book saved successfully');
-  //     } catch (error) {
-  //       console.error('Failed to save book:', error);
-  //     }
-  //   }
-  // };
+  const handleSaveBook = async () => {
+    if (data) {
+      try {
+        console.log('Attempting to save book:', data);
+        const savedBook = await postMyBook(data);
+        console.log('Book saved successfully:', savedBook);
+      } catch (error) {
+        console.error('Failed to save book:', error);
+      }
+    }
+  };
+  if (!data) {
+    return (
+      <SafeAreaView className="bg-slate-700 h-full justify-center items-center">
+        <Text className="text-white text-xl">Loading...</Text>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView className="bg-slate-700 h-full">
       <ScrollView contentContainerStyle={{ padding: 16 }}>
         <View className="bg-slate-700">
           <Text className="text-3xl font-bold text-white mb-4">
-            {data?.volumeInfo.title}
+            {data.title}
           </Text>
-          {data?.volumeInfo.imageLinks?.thumbnail ? (
+          {data.imageLinks?.thumbnail ? (
             <Image
-              source={{ uri: data.volumeInfo.imageLinks.thumbnail }}
-              className="h-[300px] w-[200px] rounded-xl mb-4"
+              source={{ uri: data.imageLinks.thumbnail }}
+              className="h-[300px] w-[200px] rounded-xl mb-4 self-center"
               resizeMode="cover"
             />
           ) : (
             <Text className="text-white mb-4">No image available</Text>
           )}
           <Text className="text-white mb-4">
-            {data?.volumeInfo.publishedDate}
+            Authors: {data.authors.join(', ')}
           </Text>
           <Text className="text-white mb-4">
-            {data?.volumeInfo.description}
+            Published: {data.publishedDate}
           </Text>
-          {/* <CustomButton title="Save Book" handlePress={handleSaveBook} /> */}
+          <Text className="text-white mb-4">
+            Description: {data.description}
+          </Text>
+          <CustomButton title="Save Book" handlePress={handleSaveBook} />
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
+
 export default GetBooks;

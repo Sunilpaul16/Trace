@@ -1,7 +1,9 @@
-import { MY_BOOK_API_KEY } from '../config';
-
-const API_KEY = MY_BOOK_API_KEY;
-const POPULAR_BOOKS_API_URL = `https://www.googleapis.com/books/v1/volumes?q=bestsellers&maxResults=10&orderBy=relevance&key=${API_KEY}`;
+import {
+  MY_BOOK_API_KEY,
+  BOOK_BASE_URL,
+  POPULAR_BOOKS_API_URL,
+  PORT_BOOKS
+} from '../config';
 
 export const fetchBooks = async () => {
   try {
@@ -17,7 +19,7 @@ export const fetchBooks = async () => {
 export const fetchBookDetail = async (id: any) => {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes/${id}?key=${API_KEY}`
+      `${BOOK_BASE_URL}${id}?key=${MY_BOOK_API_KEY}`
     );
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -28,29 +30,30 @@ export const fetchBookDetail = async (id: any) => {
     throw error;
   }
 };
-const API = `http://10.0.2.2:3000/books`;
-
+export interface Book {
+  id: string;
+  title: string;
+  authors: string[];
+  publishedDate: string;
+  description: string;
+  imageLinks: {
+    thumbnail: string;
+  };
+}
 export const getMyBooks = async () => {
   try {
-    const response = await fetch(API);
+    const response = await fetch(PORT_BOOKS);
     return await response.json();
   } catch (error) {
     console.log('Error getting Books', error);
   }
 };
 
-export interface Book {
-  id: string;
-  releaseDate: string;
-  overview: string;
-  title: string;
-  publishedDate: string;
-  description: string;
-}
-
 export const postMyBook = async (book: Book): Promise<Book> => {
   try {
-    const response = await fetch(API, {
+    console.log('Sending book data:', book); // Add this log
+
+    const response = await fetch(PORT_BOOKS, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
