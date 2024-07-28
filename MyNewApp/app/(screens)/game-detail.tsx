@@ -7,29 +7,55 @@ import {
   TouchableOpacity
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { fetchGameDetail, Game, postMyGame } from '../../API/gameAPI';
+import {
+  deleteGameFromMyGames,
+  fetchGameDetail,
+  Game,
+  postMyGame,
+  getMyGames
+} from '../../API/gameAPI';
 import { useLocalSearchParams } from 'expo-router';
 import { COVER_BASE_URL } from '../../config';
+import CustomButton from '../../components/button';
 
 const GameDetail = () => {
   const [data, setData] = useState<Game | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (id) {
       fetchGameDetail(Number(id))
         .then(json => setData(json))
         .catch(error => console.error('Failed to fetch game details:', error));
+      getMyGames()
+        .then(savedGames => {
+          const isGameSaved = savedGames.some(
+            (game: { id: number }) => game.id === Number(id)
+          );
+          setIsSaved(isGameSaved);
+        })
+        .catch(error =>
+          console.error('Failed to check if game is saved:', error)
+        );
     }
   }, [id]);
 
   const handleSaveGame = async () => {
     if (data) {
       try {
-        await postMyGame(data);
-        console.log('Game saved successfully');
+        if (isSaved) {
+          await deleteGameFromMyGames(data.id);
+          console.log('Game removed successfully:', data.id);
+          setIsSaved(false);
+        } else {
+          console.log('Attempting to save game:');
+          await postMyGame(data);
+          console.log('Game saved successfully');
+          setIsSaved(true);
+        }
       } catch (error) {
-        console.error('Failed to save game:', error);
+        console.error('Failed to save/remove game:');
       }
     }
   };
@@ -82,12 +108,10 @@ const GameDetail = () => {
               <Text className="text-lg text-white mb-4">{data.storyline}</Text>
             </>
           )}
-          <TouchableOpacity
-            onPress={handleSaveGame}
-            className="bg-blue-500 py-3 px-6 rounded-full self-center mt-4"
-          >
-            <Text className="text-white font-bold text-lg">Save Game</Text>
-          </TouchableOpacity>
+          <CustomButton
+            title={isSaved ? 'Remove Game' : 'Save Game'}
+            handlePress={handleSaveGame}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

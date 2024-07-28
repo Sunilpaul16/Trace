@@ -111,3 +111,17 @@ export const postMyGame = async (game: Game) => {
     throw error;
   }
 };
+
+export const deleteGameFromMyGames = async (id: number) => {
+  try {
+    const response = await fetch(`${PORT_GAMES}/${id}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.log('Error deleting Game', error);
+    throw error;
+  }
+};
