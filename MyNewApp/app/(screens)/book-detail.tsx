@@ -54,35 +54,37 @@ const GetBooks = () => {
 
   if (!data) {
     return (
-      <SafeAreaView className="bg-slate-700 h-full justify-center items-center">
+      <SafeAreaView className="flex-1 bg-gray-900 justify-center items-center">
         <Text className="text-white text-xl">Loading...</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="bg-slate-700 h-full">
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <View className="bg-slate-700">
-          <Text className="text-3xl font-bold text-white mb-4">
+    <SafeAreaView className="flex-1 bg-gray-900 p-4">
+      <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
+        <View className="bg-gray-900">
+          <Text className="text-4xl font-bold text-white mb-4">
             {data.title}
           </Text>
           {data.imageLinks?.thumbnail ? (
-            <Image
-              source={{ uri: data.imageLinks.thumbnail }}
-              className="h-[300px] w-[200px] rounded-xl mb-4 self-center"
-              resizeMode="cover"
-            />
+            <View className="flex justify-center items-center mb-4">
+              <Image
+                source={{ uri: data.imageLinks.thumbnail }}
+                className="h-[300px] w-[200px] rounded-xl"
+                resizeMode="cover"
+              />
+            </View>
           ) : (
             <Text className="text-white mb-4">No image available</Text>
           )}
-          <Text className="text-white mb-4">
+          <Text className="text-xl text-white mb-4">
             Authors: {data.authors.join(', ')}
           </Text>
-          <Text className="text-white mb-4">
+          <Text className="text-xl text-white mb-4">
             Published: {data.publishedDate}
           </Text>
-          <Text className="text-white mb-4">
+          <Text className="text-lg text-white mb-4">
             Description: {data.description}
           </Text>
           <CustomButton

@@ -56,39 +56,42 @@ const MovieDetail = () => {
   };
 
   return (
-    <SafeAreaView className="bg-gray-900 h-full">
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <View className="bg-gray-900">
-          <Text className="text-3xl font-bold text-white mb-4">
-            {data?.title}
-          </Text>
-          {data?.poster_path ? (
-            <Image
-              source={{ uri: `${IMAGE_BASE_URL}${data.poster_path}` }}
-              className="h-[300px] w-[200px] rounded-xl mb-4"
-              resizeMode="cover"
+    <SafeAreaView className="flex-1 bg-gray-900 p-4">
+      <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
+        {data && (
+          <>
+            <Text className="text-4xl font-bold text-white mb-4">
+              {data.title}
+            </Text>
+            <View className="flex justify-center items-center mb-4">
+              {data.poster_path ? (
+                <Image
+                  source={{ uri: `${IMAGE_BASE_URL}${data.poster_path}` }}
+                  className="h-[300px] w-[200px] rounded-xl"
+                  resizeMode="cover"
+                />
+              ) : (
+                <Text className="text-white">No poster image available</Text>
+              )}
+            </View>
+            <Text className="text-xl text-white mb-4">
+              Release Date: {data.release_date}
+            </Text>
+            <Text className="text-xl text-white mb-4">
+              Rating: {data.vote_average}
+            </Text>
+            <Text className="text-xl text-white mb-4">
+              Runtime: {data.runtime} mins
+            </Text>
+            <Text className="text-lg text-white mb-4">
+              Overview: {data.overview}
+            </Text>
+            <CustomButton
+              title={isSaved ? 'Remove from My Movies' : 'Save to My Movies'}
+              handlePress={handleSaveMovie}
             />
-          ) : (
-            <Text className="text-white mb-4">No poster image available</Text>
-          )}
-          <Text className="text-xl font-bold text-white mb-2">
-            Release Date: {data?.release_date}
-          </Text>
-          <Text className="text-xl font-bold text-white mb-2">
-            Rating: {data?.vote_average}
-          </Text>
-          <Text className="text-xl font-bold text-white mb-2">
-            Runtime: {data?.runtime} mins
-          </Text>
-          <Text className="text-lg text-white">
-            Overview:
-            {data?.overview}
-          </Text>
-          <CustomButton
-            title={isSaved ? 'Remove from My Movies' : 'Save to My Movies'}
-            handlePress={handleSaveMovie}
-          />
-        </View>
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

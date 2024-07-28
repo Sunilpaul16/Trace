@@ -1,12 +1,7 @@
-import {
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  Image,
-  TouchableOpacity
-} from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { Image, ScrollView, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useLocalSearchParams } from 'expo-router';
 import {
   deleteGameFromMyGames,
   fetchGameDetail,
@@ -14,7 +9,6 @@ import {
   postMyGame,
   getMyGames
 } from '../../API/gameAPI';
-import { useLocalSearchParams } from 'expo-router';
 import { COVER_BASE_URL } from '../../config';
 import CustomButton from '../../components/button';
 
@@ -46,73 +40,46 @@ const GameDetail = () => {
       try {
         if (isSaved) {
           await deleteGameFromMyGames(data.id);
-          console.log('Game removed successfully:', data.id);
-          setIsSaved(false);
         } else {
-          console.log('Attempting to save game:');
           await postMyGame(data);
-          console.log('Game saved successfully');
-          setIsSaved(true);
         }
+        setIsSaved(!isSaved);
       } catch (error) {
-        console.error('Failed to save/remove game:');
+        console.error('Error saving game:', error);
       }
     }
   };
 
-  if (!data) {
-    return (
-      <SafeAreaView className="bg-slate-700 h-full justify-center items-center">
-        <Text className="text-white text-xl">Loading...</Text>
-      </SafeAreaView>
-    );
-  }
-
   return (
-    <SafeAreaView className="bg-slate-700 h-full">
-      <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <View className="bg-slate-700">
-          {data.cover && data.cover.image_id ? (
-            <Image
-              source={{ uri: `${COVER_BASE_URL}${data.cover.image_id}.jpg` }}
-              className="h-[300px] w-[200px] rounded-xl self-center mb-4"
-              resizeMode="cover"
-            />
-          ) : (
-            <View className="h-[300px] w-[200px] bg-slate-600 rounded-xl self-center mb-4 justify-center items-center">
-              <Text className="text-lg text-white">No cover available</Text>
+    <SafeAreaView className="flex-1 bg-gray-900 p-4">
+      <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
+        {data && (
+          <>
+            <Text className="text-4xl font-bold text-white mb-4">
+              {data.name}
+            </Text>
+            <View className="flex justify-center items-center mb-4">
+              {data.cover?.image_id ? (
+                <Image
+                  source={{
+                    uri: `${COVER_BASE_URL}${data.cover.image_id}.jpg`
+                  }}
+                  className="h-[300px] w-[200px] rounded-xl"
+                />
+              ) : (
+                <Text className="text-white">No cover image available</Text>
+              )}
             </View>
-          )}
-          <Text className="text-3xl font-bold text-white mb-4">
-            {data.name}
-          </Text>
-          {data.aggregated_rating && (
-            <Text className="text-xl text-white mb-2">
-              Rating: {data.aggregated_rating.toFixed(1)}/100
+            <Text className="text-xl text-white mb-4">
+              Release Date: {data.first_release_date}
             </Text>
-          )}
-          {data.first_release_date && (
-            <Text className="text-xl text-white mb-2">
-              Release Date:{' '}
-              {new Date(data.first_release_date * 1000).toLocaleDateString()}
-            </Text>
-          )}
-          {data.summary && (
             <Text className="text-lg text-white mb-4">{data.summary}</Text>
-          )}
-          {data.storyline && (
-            <>
-              <Text className="text-2xl font-bold text-white mb-2">
-                Storyline
-              </Text>
-              <Text className="text-lg text-white mb-4">{data.storyline}</Text>
-            </>
-          )}
-          <CustomButton
-            title={isSaved ? 'Remove Game' : 'Save Game'}
-            handlePress={handleSaveGame}
-          />
-        </View>
+            <CustomButton
+              title={isSaved ? 'Remove from My Games' : 'Save to My Games'}
+              handlePress={handleSaveGame}
+            />
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

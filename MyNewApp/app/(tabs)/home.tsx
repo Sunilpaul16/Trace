@@ -5,6 +5,7 @@ const Home = () => {
   return (
     <View className="flex-1 items-center justify-center bg-gray-900">
       {/* <Home /> */}
+      <Text className="text-3xl text-white">Home</Text>
     </View>
   );
 };

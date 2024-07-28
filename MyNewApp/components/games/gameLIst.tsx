@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { fetchGames, Game } from '../../API/gameAPI';
-import {
-  View,
-  Text,
-  FlatList,
-  SafeAreaView,
-  TouchableOpacity,
-  Image
-} from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { COVER_BASE_URL } from '../../config';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const GetGames = () => {
   const [games, setGames] = useState<Game[]>([]);
