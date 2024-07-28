@@ -3,6 +3,7 @@ import {
   getBooks,
   getGames,
   getMovies,
+  postBook,
   postGame,
   postMovie
 } from './controllers';
@@ -13,7 +14,7 @@ router.get('/movies', getMovies);
 router.post('/movies', postMovie);
 
 router.get('/books', getBooks);
-router.post('/books', getBooks);
+router.post('/books', postBook);
 
 router.get('/games', getGames);
 router.post('/games', postGame);
