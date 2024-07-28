@@ -12,10 +12,10 @@ const CustomButton = ({
   return (
     <TouchableOpacity
       onPress={handlePress}
-      className=" bg-blue-500 rounded-xl justify-center items-center h-12 my-3 "
+      className=" bg-blue-500 rounded-2xl justify-center items-center h-12 my-3 "
     >
       <View className="flex justify-center items-center">
-        <Text>{title}</Text>
+        <Text className="text-white text-xl ">{title}</Text>
       </View>
     </TouchableOpacity>
   );
