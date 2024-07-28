@@ -1,55 +1,53 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'expo-router';
+import { fetchGames, Game } from '../../API/gameAPI';
 import {
   View,
   Text,
   FlatList,
   SafeAreaView,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'expo-router';
-import { Game, fetchGames } from '../../API/gameAPI';
-
-type Games = {
-  id: number;
-  title: string;
-  release_date: string;
-  vote_average: number;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-};
+import { COVER_BASE_URL } from '../../config';
 
 const GetGames = () => {
-  const [data, setData] = useState<Game[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
   const router = useRouter();
 
   useEffect(() => {
     const getGames = async () => {
       try {
-        const movies = await fetchGames();
-        setData(movies);
+        const games = await fetchGames();
+        setGames(games);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching games:', error);
       }
     };
     getGames();
   }, []);
 
   const renderItem = ({ item }: { item: Game }) => (
-    <TouchableOpacity
-      onPress={() => router.push(`/movie-detail?id=${item.id}`)}
-    >
+    <TouchableOpacity onPress={() => router.push(`/game-detail?id=${item.id}`)}>
       <View className="bg-slate-700 border-2 border-red-700 p-4 mb-4 rounded-lg">
-        <Text className="text-2xl font-bold text-white">{item.title}</Text>
-        <Text className="text-lg text-white"></Text>
+        <Text className="text-2xl font-bold text-white">{item.name}</Text>
+        {item.cover && item.cover.image_id ? (
+          <Image
+            source={{ uri: `${COVER_BASE_URL}${item.cover.image_id}.jpg` }}
+            className="h-[200px] w-[150px] rounded-xl"
+            resizeMode="cover"
+          />
+        ) : (
+          <Text className="text-lg text-white">No cover available</Text>
+        )}
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView className="bg-slate-400 h-full">
+    <SafeAreaView style={{ backgroundColor: 'slategray', flex: 1 }}>
       <FlatList
-        data={data}
+        data={games}
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ padding: 16 }}

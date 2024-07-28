@@ -1,5 +1,7 @@
-import { Text, View } from 'react-native';
+import { SafeAreaView, Text, View } from 'react-native';
 import React from 'react';
+import HorizontalList from '../../components/books/myBookList';
+import GetGames from '../../components/games/gameLIst';
 
 type Games = {
   id: number;
@@ -12,9 +14,12 @@ type Games = {
 };
 const Games = () => {
   return (
-    <View className="flex-1 items-center justify-center bg-slate-400">
-      <Text className="text-3xl">Games are fun</Text>
-    </View>
+    <SafeAreaView className="bg-slate-400 h-full">
+      <GetGames />
+      <View className="bg-slate-400 h-40 border-2 border-red-600">
+        <HorizontalList />
+      </View>
+    </SafeAreaView>
   );
 };
 
