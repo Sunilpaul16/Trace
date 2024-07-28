@@ -8,8 +8,8 @@ import {
 import React, { useState } from 'react';
 import CustomButton from '../../components/ui/button';
 import { Link, router } from 'expo-router';
-import { Entypo } from '@expo/vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { eyeHideIcon, eyeShowIcon } from '../../assets/icons';
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,11 +32,7 @@ const SignIn = () => {
               autoCapitalize="none"
             />
             <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
-              {showPassword ? (
-                <Entypo name="eye" size={24} color="gray" />
-              ) : (
-                <Entypo name="eye-with-line" size={24} color="gray" />
-              )}
+              {showPassword ? eyeHideIcon : eyeShowIcon}
             </TouchableOpacity>
           </View>
           <CustomButton
