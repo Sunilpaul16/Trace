@@ -6,11 +6,11 @@ import { View } from 'react-native';
 
 const App = () => {
   return (
-    <SafeAreaView className="bg-slate-400 h-full">
+    <SafeAreaView className="bg-gray-900 h-full">
       <GetMovies />
-      <View className="bg-slate-400 h-40 border-2 border-red-600">
+      {/* <View className="bg-gray-900 h-40 border-2 border-red-600">
         <HorizontalList />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

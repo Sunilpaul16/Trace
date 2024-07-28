@@ -35,7 +35,7 @@ const HorizontalList = () => {
     <TouchableOpacity
       onPress={() => router.push(`/movie-detail?id=${item.id}`)}
     >
-      <View className="bg-slate-700 border-2 border-red-700 items-center p-3 mb-2 rounded-lg">
+      <View className="bg-gray-900 border-2 border-red-700 items-center p-3 mb-2 rounded-lg">
         <View className="mt-2">
           {item.poster_path ? (
             <View>
@@ -54,7 +54,7 @@ const HorizontalList = () => {
   );
 
   return (
-    <View className="bg-slate-400 h-full">
+    <View className="bg-gray-900 h-full">
       <Text className="text-white text-2xl mt-2">My Movies</Text>
       <FlatList
         data={movies}

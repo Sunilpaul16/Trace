@@ -35,7 +35,7 @@ const GetMovies = () => {
     <TouchableOpacity
       onPress={() => router.push(`/movie-detail?id=${item.id}`)}
     >
-      <View className="bg-slate-700 border-2 border-red-700 p-4 mb-4 rounded-lg">
+      <View className="bg-gray-900 border-2 border-red-700 p-4 mb-4 rounded-lg">
         <Text className="text-2xl font-bold text-white">{item.title}</Text>
         <Text className="text-lg text-white">
           {item.release_date}, {item.vote_average}
@@ -55,7 +55,7 @@ const GetMovies = () => {
   );
 
   return (
-    <SafeAreaView className="bg-slate-400 h-full">
+    <SafeAreaView className="bg-gray-900 h-full">
       <FlatList
         data={data}
         keyExtractor={({ id }) => id.toString()}

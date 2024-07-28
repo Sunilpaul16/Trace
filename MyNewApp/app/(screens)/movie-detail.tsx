@@ -56,9 +56,9 @@ const MovieDetail = () => {
   };
 
   return (
-    <SafeAreaView className="bg-slate-700 h-full">
+    <SafeAreaView className="bg-gray-900 h-full">
       <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <View className="bg-slate-700">
+        <View className="bg-gray-900">
           <Text className="text-3xl font-bold text-white mb-4">
             {data?.title}
           </Text>

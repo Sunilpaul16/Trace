@@ -14,11 +14,11 @@ type Games = {
 };
 const Games = () => {
   return (
-    <SafeAreaView className="bg-slate-400 h-full">
+    <SafeAreaView className="bg-gray-900 h-full">
       <GetGames />
-      <View className="bg-slate-400 h-40 border-2 border-red-600">
+      {/* <View className="bg-slate-400 h-40 border-2 border-red-600">
         <HorizontalList />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };

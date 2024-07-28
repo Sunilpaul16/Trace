@@ -20,6 +20,9 @@ const _layout = () => {
       <Stack.Screen
         name="(tabs)"
         options={{
+          contentStyle: {
+            backgroundColor: '#94a3b8'
+          },
           headerShown: false,
           headerStyle: {
             backgroundColor: '#94a3b8'

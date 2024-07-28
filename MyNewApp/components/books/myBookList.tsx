@@ -34,7 +34,7 @@ const HorizontalList = () => {
 
   const renderItem = ({ item }: { item: Book }) => (
     <TouchableOpacity onPress={() => router.push(`/book-detail?id=${item.id}`)}>
-      <View className="bg-slate-700 border-2 border-red-700 items-center p-3 mb-2 rounded-lg">
+      <View className="bg-gray-900 border-2 border-red-700 items-center p-3 mb-2 rounded-lg">
         <View className="mt-2">
           {item.volumeInfo.imageLinks?.thumbnail ? (
             <View>
@@ -55,9 +55,7 @@ const HorizontalList = () => {
   );
 
   return (
-    <>
-      {/* <View className="bg-slate-400 h-full"> */}
-      {/* <Text className="text-white text-2xl mt-2">My Books</Text> */}
+    <View className="bg-gray-900 h-full">
       <FlatList
         data={books}
         keyExtractor={({ id }) => id}
@@ -65,8 +63,7 @@ const HorizontalList = () => {
         horizontal
         contentContainerStyle={{ padding: 16 }}
       />
-      {/* </View> */}
-    </>
+    </View>
   );
 };
 export default HorizontalList;

@@ -29,7 +29,7 @@ const GetGames = () => {
 
   const renderItem = ({ item }: { item: Game }) => (
     <TouchableOpacity onPress={() => router.push(`/game-detail?id=${item.id}`)}>
-      <View className="bg-slate-700 border-2 border-red-700 p-4 mb-4 rounded-lg">
+      <View className="bg-gray-900 border-2 border-red-700 p-4 mb-4 rounded-lg">
         <Text className="text-2xl font-bold text-white">{item.name}</Text>
         {item.cover && item.cover.image_id ? (
           <Image
@@ -45,7 +45,7 @@ const GetGames = () => {
   );
 
   return (
-    <SafeAreaView style={{ backgroundColor: 'slategray', flex: 1 }}>
+    <SafeAreaView className="bg-gray-900 h-full">
       <FlatList
         data={games}
         keyExtractor={({ id }) => id.toString()}

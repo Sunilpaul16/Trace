@@ -34,7 +34,7 @@ const GetBooks = () => {
 
   const renderItem = ({ item }: { item: Book }) => (
     <TouchableOpacity onPress={() => router.push(`/book-detail?id=${item.id}`)}>
-      <View className="bg-slate-700 border-2 border-red-700 p-4 mb-4 rounded-lg">
+      <View className="bg-gray-900 border-2 border-red-700 p-4 mb-4 rounded-lg">
         <Text className="text-2xl font-bold text-white">
           {item.volumeInfo.title}
         </Text>
@@ -53,7 +53,7 @@ const GetBooks = () => {
   );
 
   return (
-    <SafeAreaView className="bg-slate-400 h-full">
+    <SafeAreaView className="bg-gray-900 h-full">
       <FlatList
         data={data}
         keyExtractor={({ id }) => id}
