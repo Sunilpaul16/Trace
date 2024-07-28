@@ -1,6 +1,6 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import GetMovies from '../../components/movie/movieList';
+import GetMovies from '../../components/movies/movieList';
 
 const App = () => {
   return (
