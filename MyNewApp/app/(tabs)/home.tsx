@@ -1,12 +1,13 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import React from 'react';
+import HomePage from '../../components/home';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
   return (
-    <View className="flex-1 items-center justify-center bg-gray-900">
-      {/* <Home /> */}
-      <Text className="text-3xl text-white">Home</Text>
-    </View>
+    <SafeAreaView className="bg-gray-900 h-full">
+      <HomePage />
+    </SafeAreaView>
   );
 };
 

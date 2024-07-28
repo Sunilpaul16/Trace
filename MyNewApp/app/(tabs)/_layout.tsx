@@ -5,7 +5,14 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const TabsLayout = () => {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: '#FF',
+        tabBarStyle: {
+          backgroundColor: '#111827'
+        }
+      }}
+    >
       <Tabs.Screen
         name="home"
         options={{
