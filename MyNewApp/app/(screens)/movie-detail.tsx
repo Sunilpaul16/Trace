@@ -2,7 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
-import { fetchMovieDetail, postMyMovies } from '../../API/movieAPI';
+import {
+  deleteMovieFromMyMovies,
+  fetchMovieDetail,
+  postMyMovies
+} from '../../API/movieAPI';
 import CustomButton from '../../components/button';
 import { IMAGE_BASE_URL } from '../../config';
 
@@ -21,6 +25,7 @@ type Movie = {
 const MovieDetail = () => {
   const [data, setData] = useState<Movie | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -33,10 +38,19 @@ const MovieDetail = () => {
   const handleSaveMovie = async () => {
     if (data) {
       try {
-        await postMyMovies(data);
-        console.log('Movie saved successfully');
+        if (isSaved) {
+          await deleteMovieFromMyMovies(data.id);
+          console.log('Movie removed successfully:', data.id);
+          setIsSaved(false);
+        } else {
+          console.log('Attempting to save movie:');
+          await postMyMovies(data);
+          console.log('Movie saved successfully');
+          setIsSaved(true);
+        }
       } catch (error) {
-        console.error('Failed to save movie:', error);
+        console.log(data);
+        console.error('Failed to save/remove movie:', error);
       }
     }
   };
@@ -57,7 +71,6 @@ const MovieDetail = () => {
           ) : (
             <Text className="text-white mb-4">No poster image available</Text>
           )}
-          <CustomButton title={'Watchlist'} handlePress={handleSaveMovie} />
           <Text className="text-xl font-bold text-white mb-2">
             Release Date: {data?.release_date}
           </Text>
@@ -71,6 +84,10 @@ const MovieDetail = () => {
             Overview:
             {data?.overview}
           </Text>
+          <CustomButton
+            title={isSaved ? 'Remove from My Movies' : 'Save to My Movies'}
+            handlePress={handleSaveMovie}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

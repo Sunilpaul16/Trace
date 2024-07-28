@@ -66,3 +66,16 @@ export const postMyMovies = async (movie: Movie) => {
     throw error;
   }
 };
+export const deleteMovieFromMyMovies = async (id: number) => {
+  try {
+    const response = await fetch(`${PORT_MOVIES}/${id}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.log('Error deleting Movie', error);
+    throw error;
+  }
+};
