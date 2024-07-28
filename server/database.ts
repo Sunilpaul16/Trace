@@ -7,32 +7,27 @@ mongoose.connection.on('open', function () {
   console.log('connected to MongoDB');
 });
 
-const gameSchema = new Schema({
-  id: { type: Number },
-  name: { type: String },
-  vote_average: { type: Number },
-  description: { type: String },
-  thumbnail: { type: String },
-  age_ratings: { type: Number },
-  cover: { type: String },
-  first_release_date: { type: Date },
-  release_dates: { type: String },
-  storyline: { type: String },
+const gameSchema = new mongoose.Schema({
+  id: { type: Number, required: true, unique: true },
+  name: { type: String, required: true },
+  cover: {
+    image_id: { type: String }
+  },
+  aggregated_rating: { type: Number },
+  first_release_date: { type: Number },
   summary: { type: String },
-  videos: { type: String },
-  platforms: { type: String }
+  storyline: { type: String }
 });
 
 const bookSchema = new Schema({
-  id: { type: Number },
-  title: { type: String },
-  vote_average: { type: Number },
+  id: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
+  authors: [{ type: String }],
+  publishedDate: { type: String },
   description: { type: String },
-  thumbnail: { type: String },
-  author: { type: String },
-  publishedDate: { type: Date },
-  pageCount: { type: Number },
-  printedPageCount: { type: Number }
+  imageLinks: {
+    thumbnail: { type: String }
+  }
 });
 
 const movieSchema = new Schema({
@@ -52,5 +47,3 @@ const Movie = mongoose.model('Movie', movieSchema);
 const Book = mongoose.model('Book', bookSchema);
 
 export { Movie, Book, Game };
-
-
