@@ -3,11 +3,17 @@ import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import CustomButton from '../../components/button';
-import { fetchBookDetail, postMyBook, Book } from '../../API/bookAPI';
+import {
+  fetchBookDetail,
+  postMyBook,
+  Book,
+  deleteBookFromMyBooks
+} from '../../API/bookAPI';
 
 const GetBooks = () => {
   const [data, setData] = useState<Book | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     if (id) {
@@ -30,14 +36,22 @@ const GetBooks = () => {
   const handleSaveBook = async () => {
     if (data) {
       try {
-        console.log('Attempting to save book:', data);
-        const savedBook = await postMyBook(data);
-        console.log('Book saved successfully:', savedBook);
+        if (isSaved) {
+          await deleteBookFromMyBooks(data.id);
+          console.log('Book removed successfully:', data.id);
+          setIsSaved(false);
+        } else {
+          console.log('Attempting to save book:');
+          await postMyBook(data);
+          console.log('Book saved successfully');
+          setIsSaved(true);
+        }
       } catch (error) {
-        console.error('Failed to save book:', error);
+        console.error('Failed to save/remove book:');
       }
     }
   };
+
   if (!data) {
     return (
       <SafeAreaView className="bg-slate-700 h-full justify-center items-center">
@@ -71,7 +85,10 @@ const GetBooks = () => {
           <Text className="text-white mb-4">
             Description: {data.description}
           </Text>
-          <CustomButton title="Save Book" handlePress={handleSaveBook} />
+          <CustomButton
+            title={isSaved ? 'Remove Book' : 'Save Book'}
+            handlePress={handleSaveBook}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>

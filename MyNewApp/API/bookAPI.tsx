@@ -51,8 +51,6 @@ export const getMyBooks = async () => {
 
 export const postMyBook = async (book: Book): Promise<Book> => {
   try {
-    console.log('Sending book data:', book); // Add this log
-
     const response = await fetch(PORT_BOOKS, {
       method: 'POST',
       headers: {
@@ -66,6 +64,20 @@ export const postMyBook = async (book: Book): Promise<Book> => {
     return await response.json();
   } catch (error) {
     console.log('Error creating Book', error);
+    throw error;
+  }
+};
+
+export const deleteBookFromMyBooks = async (id: string): Promise<void> => {
+  try {
+    const response = await fetch(`${PORT_BOOKS}/${id}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+  } catch (error) {
+    console.log('Error deleting Book', error);
     throw error;
   }
 };
