@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { getMyMovies } from '../../API/movieAPI';
 import { useRouter } from 'expo-router';
-
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+import { IMAGE_BASE_URL } from '../../config';
 
 type Movie = {
   id: number;

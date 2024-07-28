@@ -1,11 +1,13 @@
-import { MY_MOVIE_API_KEY } from '../config';
-
-const API_KEY = MY_MOVIE_API_KEY;
-const POPULAR_API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`;
+import {
+  MOVIE_API_KEY,
+  MOVIE_BASE_URL,
+  POPULAR_MOVIES_API_URL,
+  PORT_MOVIES
+} from '../config';
 
 export const fetchMovies = async () => {
   try {
-    const response = await fetch(POPULAR_API_URL);
+    const response = await fetch(POPULAR_MOVIES_API_URL);
     const json = await response.json();
     return json.results;
   } catch (error) {
@@ -16,7 +18,7 @@ export const fetchMovies = async () => {
 export const fetchMovieDetail = async (id: any) => {
   try {
     const response = await fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`
+      `${MOVIE_BASE_URL}${id}?api_key=${MOVIE_API_KEY}`
     );
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -27,27 +29,28 @@ export const fetchMovieDetail = async (id: any) => {
     throw error;
   }
 };
-const API = `http://10.0.2.2:3000/movies`;
-
+export interface Movie {
+  id: number;
+  title: string;
+  releaseDate: string;
+  overview: string;
+  vote_average: number;
+  poster_path: string;
+  backdrop_path: string;
+  runtime: number;
+}
 export const getMyMovies = async () => {
   try {
-    const response = await fetch(API);
+    const response = await fetch(PORT_MOVIES);
     return await response.json();
   } catch (error) {
     console.log('Error getting Movies', error);
   }
 };
 
-export interface Movie {
-  id: number;
-  title: string;
-  releaseDate: string;
-  overview: string;
-}
-
 export const postMyMovies = async (movie: Movie) => {
   try {
-    const response = await fetch(API, {
+    const response = await fetch(PORT_MOVIES, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

@@ -3,8 +3,7 @@ import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { fetchMovies } from '../../API/movieAPI';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+import { IMAGE_BASE_URL } from '../../config';
 
 type Movie = {
   id: number;
