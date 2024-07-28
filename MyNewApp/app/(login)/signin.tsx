@@ -1,6 +1,6 @@
 import { Text, TextInput, View } from 'react-native';
 import React from 'react';
-import CustomButton from '../../components/button';
+import CustomButton from '../../components/ui/button';
 import { Link, router } from 'expo-router';
 
 const SignIn = () => {

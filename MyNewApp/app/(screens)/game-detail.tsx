@@ -10,7 +10,7 @@ import {
   getMyGames
 } from '../../API/gameAPI';
 import { COVER_BASE_URL } from '../../config';
-import CustomButton from '../../components/button';
+import CustomButton from '../../components/ui/button';
 
 const GameDetail = () => {
   const [data, setData] = useState<Game | null>(null);

@@ -7,7 +7,7 @@ import {
   fetchMovieDetail,
   postMyMovies
 } from '../../API/movieAPI';
-import CustomButton from '../../components/button';
+import CustomButton from '../../components/ui/button';
 import { IMAGE_BASE_URL } from '../../config';
 
 type Movie = {

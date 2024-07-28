@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native';
 import React from 'react';
-import HomePage from '../../components/home';
+import HomePage from '../../components/ui/home';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
