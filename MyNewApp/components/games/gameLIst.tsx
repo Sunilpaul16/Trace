@@ -45,6 +45,11 @@ const GetGames = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ padding: 16 }}
+        ListHeaderComponent={
+          <Text className="text-4xl text-white font-bold mb-3 -mt-4 border-2 border-red-500">
+            Games
+          </Text>
+        }
       />
     </SafeAreaView>
   );
