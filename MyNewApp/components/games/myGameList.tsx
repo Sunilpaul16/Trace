@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { getMyGames, Game } from '../../API/gameAPI';
-import { View, Text, TouchableOpacity, FlatList } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { COVER_BASE_URL } from '../../config';
 
 const MyGamesList = () => {
   const [games, setGames] = useState<Game[]>([]);
@@ -23,25 +23,37 @@ const MyGamesList = () => {
 
   const renderItem = ({ item }: { item: Game }) => (
     <TouchableOpacity onPress={() => router.push(`/game-detail?id=${item.id}`)}>
-      <View className="bg-gray-900 border-2 border-red-700 items-center p-3 mb-2 rounded-lg">
-        <Text className="text-2xl text-white">{item.name}</Text>
+      <View className="mr-4 mb-2">
+        {item.cover?.image_id ? (
+          <>
+            <Image
+              source={{ uri: `${COVER_BASE_URL}${item.cover.image_id}.jpg` }}
+              className="h-[150px] w-[100px] rounded-lg"
+            />
+            <Text
+              className="text-sm font-bold text-white mt-1 w-[100px]"
+              numberOfLines={2}
+            >
+              {item.name}
+            </Text>
+          </>
+        ) : (
+          <View className="h-[150px] w-[100px] bg-gray-800 rounded-lg justify-center items-center">
+            <Text className="text-white text-center">No image</Text>
+          </View>
+        )}
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <SafeAreaView className="bg-gray-800 h-full">
-      <View className="bg-slate-400 h-full">
-        <Text className="text-white text-2xl mt-2">My Games</Text>
-        <FlatList
-          data={games}
-          keyExtractor={({ id }) => id.toString()}
-          renderItem={renderItem}
-          horizontal
-          contentContainerStyle={{ padding: 16 }}
-        />
-      </View>
-    </SafeAreaView>
+    <FlatList
+      data={games}
+      keyExtractor={({ id }) => id.toString()}
+      renderItem={renderItem}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+    />
   );
 };
 

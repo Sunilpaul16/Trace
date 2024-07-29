@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import React, { useState } from 'react';
-import CustomButton from '../../components/ui/button';
+import CustomButton from '../../components/ui/buttonComponent';
 import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { eyeHideIcon, eyeShowIcon } from '../../assets/icons';
