@@ -13,7 +13,7 @@ export const fetchMovies = async () => {
     const json = await response.json();
     return json.results;
   } catch (error) {
-    console.error(error);
+    console.log(error);
     return [];
   }
 };
@@ -27,8 +27,7 @@ export const fetchMovieDetail = async (id: any) => {
     }
     return await response.json();
   } catch (error) {
-    console.error('Failed to fetch movie details:', error);
-    throw error;
+    console.log('Failed to fetch movie details:', error);
   }
 };
 export interface Movie {
@@ -65,7 +64,6 @@ export const postMyMovies = async (movie: Movie) => {
     return await response.json();
   } catch (error) {
     console.log('Error creating Movie', error);
-    throw error;
   }
 };
 export const deleteMovieFromMyMovies = async (id: number) => {
@@ -78,6 +76,5 @@ export const deleteMovieFromMyMovies = async (id: number) => {
     }
   } catch (error) {
     console.log('Error deleting Movie', error);
-    throw error;
   }
 };

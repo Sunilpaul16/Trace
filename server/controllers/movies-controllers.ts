@@ -36,7 +36,7 @@ export const deleteMovie = async (req: Request, res: Response) => {
     }
     res.status(200).json({ message: 'Movie deleted successfully' });
   } catch (error) {
-    console.error('Error while deleting a Movie:');
+    console.log('Error while deleting a Movie:');
     res.status(500).json({ message: 'Error while deleting a Movie' });
   }
 };

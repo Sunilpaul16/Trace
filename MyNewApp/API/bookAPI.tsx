@@ -11,7 +11,7 @@ export const fetchBooks = async () => {
     const result = await response.json();
     return result.items;
   } catch (error) {
-    console.error(error);
+    console.log(error);
     return [];
   }
 };
@@ -26,7 +26,7 @@ export const fetchBookDetail = async (id: any) => {
     }
     return await response.json();
   } catch (error) {
-    console.error('Failed to fetch book details:', error);
+    console.log('Failed to fetch book details:', error);
     throw error;
   }
 };

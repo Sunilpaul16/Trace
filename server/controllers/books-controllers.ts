@@ -37,7 +37,7 @@ export const deleteBook = async (req: Request, res: Response) => {
     }
     res.status(200).json({ message: 'Book deleted successfully' });
   } catch (error) {
-    console.error('Error while deleting a Book:', error);
+    console.log('Error while deleting a Book:', error);
     res.status(500).json({ message: 'Error while deleting a Book', error });
   }
 };

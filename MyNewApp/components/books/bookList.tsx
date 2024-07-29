@@ -26,7 +26,7 @@ const GetBooks = () => {
         const response = await fetchBooks();
         setData(response);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
     getBooks();

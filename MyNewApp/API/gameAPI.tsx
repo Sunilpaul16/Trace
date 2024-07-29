@@ -48,7 +48,7 @@ export const fetchGames = async () => {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.log('Error fetching data:', error);
   }
 };
 
@@ -79,7 +79,7 @@ export const fetchGameDetail = async (id: number): Promise<Game> => {
     }
     return games[0];
   } catch (error) {
-    console.error('Failed to fetch game details:', error);
+    console.log('Failed to fetch game details:', error);
     throw error;
   }
 };

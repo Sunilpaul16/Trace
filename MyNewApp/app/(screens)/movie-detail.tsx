@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import {
   deleteMovieFromMyMovies,
   fetchMovieDetail,
   postMyMovies
 } from '../../API/movieAPI';
-import CustomButton from '../../components/ui/button';
 import { IMAGE_BASE_URL } from '../../config';
+import { arrowLeftIcon, closeIcon } from '../../assets/icons';
 
 type Movie = {
   id: number;
@@ -16,10 +16,12 @@ type Movie = {
   release_date: string;
   releaseDate: string;
   vote_average: number;
+  vote_count: number;
   overview: string;
   poster_path: string;
   backdrop_path: string;
   runtime: number;
+  genres: { name: string }[];
 };
 
 const MovieDetail = () => {
@@ -31,7 +33,7 @@ const MovieDetail = () => {
     if (id) {
       fetchMovieDetail(id)
         .then(json => setData(json))
-        .catch(error => console.error('Failed to fetch movie details:', error));
+        .catch(error => console.log('Failed to fetch movie details:', error));
     }
   }, [id]);
 
@@ -50,48 +52,49 @@ const MovieDetail = () => {
         }
       } catch (error) {
         console.log(data);
-        console.error('Failed to save/remove movie:', error);
+        console.log('Failed to save/remove movie:', error);
       }
     }
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-900 p-4">
-      <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
-        {data && (
-          <>
-            <Text className="text-4xl font-bold text-white mb-4">
-              {data.title}
-            </Text>
-            <View className="flex justify-center items-center mb-4">
-              {data.poster_path ? (
-                <Image
-                  source={{ uri: `${IMAGE_BASE_URL}${data.poster_path}` }}
-                  className="h-[300px] w-[200px] rounded-xl"
-                  resizeMode="cover"
-                />
-              ) : (
-                <Text className="text-white">No poster image available</Text>
-              )}
-            </View>
-            <Text className="text-xl text-white mb-4">
-              Release Date: {data.release_date}
-            </Text>
-            <Text className="text-xl text-white mb-4">
-              Rating: {data.vote_average}
-            </Text>
-            <Text className="text-xl text-white mb-4">
-              Runtime: {data.runtime} mins
-            </Text>
-            <Text className="text-lg text-white mb-4">
-              Overview: {data.overview}
-            </Text>
-            <CustomButton
-              title={isSaved ? 'Remove from My Movies' : 'Save to My Movies'}
-              handlePress={handleSaveMovie}
+    <SafeAreaView className="flex-1 bg-gray-900">
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="relative">
+          <Image
+            source={{ uri: `${IMAGE_BASE_URL}${data?.backdrop_path}` }}
+            className="w-full h-64"
+            resizeMode="cover"
+          />
+          <View className="absolute top-4 left-4 right-4 flex-row justify-between">
+            <TouchableOpacity onPress={() => router.back()}>
+              {arrowLeftIcon}
+            </TouchableOpacity>
+            <TouchableOpacity>{closeIcon}</TouchableOpacity>
+          </View>
+          <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
+            <Image
+              source={{ uri: `${IMAGE_BASE_URL}${data?.poster_path}` }}
+              className="w-24 h-36 rounded-lg"
             />
-          </>
-        )}
+            <View className="ml-4 mb-2">
+              <Text className="text-white text-2xl font-bold">
+                {data?.title}
+              </Text>
+              <Text className="text-white">
+                {data?.genres.map(g => g.name).join(' / ')}
+              </Text>
+            </View>
+          </View>
+        </View>
+        <View className="p-4">
+          {/* add nav here  */}
+
+          <View className="mb-4">
+            <Text className="text-xl font-bold text-white mb-2">Overview</Text>
+            <Text className="text-white">{data?.overview}</Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

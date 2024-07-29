@@ -25,7 +25,7 @@ const GetMovies = () => {
         const movies = await fetchMovies();
         setData(movies);
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     };
     getMovies();

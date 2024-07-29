@@ -1,5 +1,4 @@
 import { Text, TouchableOpacity, View } from 'react-native';
-import { Redirect, router } from 'expo-router';
 import React from 'react';
 
 const CustomButton = ({

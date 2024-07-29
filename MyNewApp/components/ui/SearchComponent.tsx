@@ -4,8 +4,7 @@ import {
   View,
   Text,
   FlatList,
-  TouchableOpacity,
-  Image
+  TouchableOpacity
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { searchIcon } from '../../assets/icons';

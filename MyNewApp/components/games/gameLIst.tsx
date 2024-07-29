@@ -15,7 +15,7 @@ const GetGames = () => {
         const games = await fetchGames();
         setGames(games);
       } catch (error) {
-        console.error('Error fetching games:', error);
+        console.log('Error fetching games:', error);
       }
     };
     getGames();

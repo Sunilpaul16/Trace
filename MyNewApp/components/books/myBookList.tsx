@@ -25,7 +25,7 @@ const MyBooksList = () => {
         const response = await fetchBooks();
         setBooks(response.items);
       } catch (error) {
-        console.error('Error fetching books:', error);
+        console.log('Error fetching books:', error);
       }
     };
 

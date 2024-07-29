@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
 import HomePage from '../../components/ui/home';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -10,6 +10,8 @@ const Home = () => {
       <View className="bg-gray-900 p-2 -mt-3 h-20 border-2 border-red-500">
         <SearchComponent data={[]} />
       </View>
+      <Text>My Progress</Text>
+      {/* add pie chart  */}
       <HomePage />
     </SafeAreaView>
   );

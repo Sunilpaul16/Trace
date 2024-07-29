@@ -1,6 +1,12 @@
 import { Tabs } from 'expo-router';
 
-import { homeIcon, bookIcon, gameIcon, movieIcon } from '../../assets/icons';
+import {
+  homeIcon,
+  bookIcon,
+  gameIcon,
+  movieIcon,
+  settingIcon
+} from '../../assets/icons';
 
 const TabsLayout = () => {
   return (
@@ -38,6 +44,13 @@ const TabsLayout = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => movieIcon
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          headerShown: false,
+          tabBarIcon: ({ color }) => settingIcon
         }}
       />
     </Tabs>

@@ -24,7 +24,7 @@ const MyMoviesList = () => {
         const fetchedMovies = await getMyMovies();
         setMovies(fetchedMovies);
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.log('Error fetching movies:', error);
       }
     };
 
