@@ -14,7 +14,7 @@ type Movie = {
   backdrop_path: string;
 };
 
-const HorizontalList = () => {
+const MyMoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const router = useRouter();
 
@@ -35,36 +35,34 @@ const HorizontalList = () => {
     <TouchableOpacity
       onPress={() => router.push(`/movie-detail?id=${item.id}`)}
     >
-      <View className="bg-gray-900 border-2 border-red-700 items-center p-3 mb-2 rounded-lg">
-        <View className="mt-2">
-          {item.poster_path ? (
-            <View>
-              <Image
-                source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
-                className="h-[280px] w-[190px] rounded-xl"
-              />
-              <Text className="text-xl font-bold text-white">{item.title}</Text>
-            </View>
-          ) : (
-            <Text className="text-white">No image available</Text>
-          )}
-        </View>
+      <View className="bg-gray-900 border-2 border-red-700 p-3 mb-2 rounded-lg w-[190px] mr-2">
+        {item.poster_path ? (
+          <>
+            <Image
+              source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
+              className="h-[280px] w-[190px] rounded-xl mb-2"
+            />
+            <Text className="text-xl font-bold text-white">{item.title}</Text>
+          </>
+        ) : (
+          <Text className="text-white">No image available</Text>
+        )}
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <View className="bg-gray-900 h-full">
-      <Text className="text-white text-2xl mt-2">My Movies</Text>
+    <View className="bg-gray-900 h-full p-4">
+      <Text className="text-white text-2xl mb-2">My Movies</Text>
       <FlatList
         data={movies}
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
         horizontal
-        contentContainerStyle={{ padding: 16 }}
+        showsHorizontalScrollIndicator={false}
       />
     </View>
   );
 };
 
-export default HorizontalList;
+export default MyMoviesList;

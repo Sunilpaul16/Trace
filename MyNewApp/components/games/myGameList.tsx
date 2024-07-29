@@ -4,7 +4,7 @@ import { getMyGames, Game } from '../../API/gameAPI';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const HorizontalList = () => {
+const MyGamesList = () => {
   const [games, setGames] = useState<Game[]>([]);
   const router = useRouter();
 
@@ -45,4 +45,4 @@ const HorizontalList = () => {
   );
 };
 
-export default HorizontalList;
+export default MyGamesList;

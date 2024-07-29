@@ -15,7 +15,7 @@ type Book = {
   };
 };
 
-const HorizontalList = () => {
+const MyBooksList = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const router = useRouter();
 
@@ -66,4 +66,4 @@ const HorizontalList = () => {
     </View>
   );
 };
-export default HorizontalList;
+export default MyBooksList;
