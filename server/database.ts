@@ -16,7 +16,30 @@ const gameSchema = new mongoose.Schema({
   aggregated_rating: { type: Number },
   first_release_date: { type: Number },
   summary: { type: String },
-  storyline: { type: String }
+  storyline: { type: String },
+  platforms: [{ name: { type: String } }],
+  involved_companies: [
+    {
+      company: { name: { type: String } }
+    }
+  ],
+  game_modes: [{ name: { type: String } }],
+  rating_count: { type: Number },
+  total_rating_count: { type: Number },
+  websites: [
+    {
+      category: { type: Number },
+      url: { type: String }
+    }
+  ],
+  genres: [{ name: { type: String } }],
+  themes: [{ name: { type: String } }],
+  player_perspectives: [{ name: { type: String } }],
+  total_rating: { type: Number },
+  status: { type: Number },
+  category: { type: Number },
+  created_at: { type: Number },
+  updated_at: { type: Number }
 });
 
 const bookSchema = new Schema({
