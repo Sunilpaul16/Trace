@@ -7,7 +7,9 @@ import {
 
 export const fetchMovies = async () => {
   try {
-    const response = await fetch(POPULAR_MOVIES_API_URL);
+    const response = await fetch(
+      `${POPULAR_MOVIES_API_URL}&language=en-US&page=1`
+    );
     const json = await response.json();
     return json.results;
   } catch (error) {
@@ -32,12 +34,12 @@ export const fetchMovieDetail = async (id: any) => {
 export interface Movie {
   id: number;
   title: string;
-  releaseDate: string;
-  overview: string;
+  release_date: string;
   vote_average: number;
+  overview: string;
   poster_path: string;
   backdrop_path: string;
-  runtime: number;
+  runtime?: number;
 }
 export const getMyMovies = async () => {
   try {

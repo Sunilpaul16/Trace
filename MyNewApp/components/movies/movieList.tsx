@@ -37,19 +37,19 @@ const GetMovies = () => {
     >
       <View className="bg-gray-900 border-2 border-red-700 p-4 mb-4 rounded-lg">
         <Text className="text-2xl font-bold text-white">{item.title}</Text>
-        <Text className="text-lg text-white">
-          {item.release_date}, {item.vote_average}
+        <Text className="text-lg text-white mb-2">
+          {item.release_date.split('-')[0]} | Rating:{' '}
+          {item.vote_average.toFixed(1)}
         </Text>
-        <View className="mt-2">
-          {item.poster_path ? (
-            <Image
-              source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
-              className="h-[200px] w-[150px] rounded-xl"
-            />
-          ) : (
-            <Text className="text-white">No image available</Text>
-          )}
-        </View>
+        {item.poster_path ? (
+          <Image
+            source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
+            className="h-[200px] w-[150px] rounded-xl"
+            resizeMode="cover"
+          />
+        ) : (
+          <Text className="text-lg text-white">No poster available</Text>
+        )}
       </View>
     </TouchableOpacity>
   );
