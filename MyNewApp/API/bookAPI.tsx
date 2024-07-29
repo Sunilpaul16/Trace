@@ -8,14 +8,16 @@ import {
 export const fetchBooks = async () => {
   try {
     const response = await fetch(POPULAR_BOOKS_API_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const result = await response.json();
     return result.items;
   } catch (error) {
-    console.log(error);
+    console.error('Error fetching books:', error);
     return [];
   }
 };
-
 export const fetchBookDetail = async (id: any) => {
   try {
     const response = await fetch(
@@ -31,6 +33,7 @@ export const fetchBookDetail = async (id: any) => {
   }
 };
 export interface Book {
+  volumeInfo: any;
   id: string;
   title: string;
   authors: string[];
@@ -46,6 +49,7 @@ export interface Book {
 export const getMyBooks = async () => {
   try {
     const response = await fetch(PORT_BOOKS);
+    console.log('Books:', response);
     return await response.json();
   } catch (error) {
     console.log('Error getting Books', error);

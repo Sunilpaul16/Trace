@@ -23,7 +23,7 @@ const GetGames = () => {
 
   const renderItem = ({ item }: { item: Game }) => (
     <TouchableOpacity onPress={() => router.push(`/game-detail?id=${item.id}`)}>
-      <View className="bg-gray-900 border-2 border-red-700 p-4 mb-4 rounded-lg">
+      <View className="bg-gray-900  p-4 mb-4 rounded-lg">
         <Text className="text-2xl font-bold text-white">{item.name}</Text>
         {item.cover && item.cover.image_id ? (
           <Image
@@ -46,7 +46,7 @@ const GetGames = () => {
         renderItem={renderItem}
         contentContainerStyle={{ padding: 16 }}
         ListHeaderComponent={
-          <Text className="text-4xl text-white font-bold mb-3 -mt-4 border-2 border-red-500">
+          <Text className="text-4xl text-white font-bold mb-3 -mt-4 ">
             Games
           </Text>
         }

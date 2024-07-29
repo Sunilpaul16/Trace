@@ -34,7 +34,7 @@ const GetBooks = () => {
 
   const renderItem = ({ item }: { item: Book }) => (
     <TouchableOpacity onPress={() => router.push(`/book-detail?id=${item.id}`)}>
-      <View className="bg-gray-900 border-2 border-red-700 p-4 mb-4 rounded-lg">
+      <View className="bg-gray-900 p-4 mb-4 rounded-lg">
         <Text className="text-2xl font-bold text-white">
           {item.volumeInfo.title}
         </Text>
@@ -60,7 +60,7 @@ const GetBooks = () => {
         renderItem={renderItem}
         contentContainerStyle={{ padding: 16 }}
         ListHeaderComponent={
-          <Text className="text-4xl text-white font-bold mb-3 -mt-4 border-2 border-red-500">
+          <Text className="text-4xl text-white font-bold mb-3 -mt-4 ">
             Books
           </Text>
         }

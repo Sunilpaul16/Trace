@@ -36,7 +36,7 @@ const SearchComponent = ({
 
   return (
     <SafeAreaView className="flex-1 bg-gray-900 ">
-      <View className="flex-row items-center bg-gray-800 border-2 border-red-500 -mt-2 p-2 h-12 rounded-xl mb-4">
+      <View className="flex-row items-center bg-gray-800 -mt-2 p-2 h-12 rounded-xl mb-4">
         <TextInput
           value={searchQuery}
           onChangeText={handleSearch}

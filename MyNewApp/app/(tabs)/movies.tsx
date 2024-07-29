@@ -7,7 +7,7 @@ import { View } from 'react-native';
 const App = () => {
   return (
     <SafeAreaView className="bg-gray-900 h-full">
-      <View className="bg-gray-900 p-2 -mt-3 h-20 border-2 border-red-500">
+      <View className="bg-gray-900 p-2 -mt-3 h-20 ">
         <SearchComponent data={[]} />
       </View>
       <GetMovies />
