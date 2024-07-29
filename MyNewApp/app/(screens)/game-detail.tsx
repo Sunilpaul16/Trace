@@ -10,6 +10,7 @@ import {
   getMyGames
 } from '../../API/gameAPI';
 import { COVER_BASE_URL } from '../../config';
+import { GameNav } from '../../components/games/gameNav';
 
 const storeNames: { [key: number]: string } = {
   13: 'Steam',
@@ -96,7 +97,7 @@ const GameDetail = () => {
         </View>
 
         <View className="p-4">
-          {/* add nav here  */}
+          <GameNav isSaved={isSaved} handleSaveGame={handleSaveGame} />
 
           <View className="mb-4">
             <Text className="text-xl font-bold text-white mb-2">Platforms</Text>
@@ -109,6 +110,27 @@ const GameDetail = () => {
                   {platform.name}
                 </Text>
               ))}
+            </View>
+          </View>
+          <View className="flex-row justify-between mb-4">
+            <View className="rounded-full px-3 py-1 flex-row items-center">
+              {[1, 2, 3, 4, 5].map(star => (
+                <Text className="text-yellow-400" key={star}>
+                  {star <= Math.round((data?.aggregated_rating ?? 0) / 10 / 2)
+                    ? '★'
+                    : '☆'}
+                </Text>
+              ))}
+              <Text className="text-white ml-1 font-bold">
+                {data?.aggregated_rating
+                  ? (data.aggregated_rating / 10).toFixed(1)
+                  : ''}
+              </Text>
+            </View>
+            <View className="flex-row items-center">
+              <Text className="text-white ml-1">
+                Release: {formatDate(data?.first_release_date)}
+              </Text>
             </View>
           </View>
 

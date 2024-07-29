@@ -8,7 +8,14 @@ import {
   postMyMovies
 } from '../../API/movieAPI';
 import { IMAGE_BASE_URL } from '../../config';
-import { arrowLeftIcon, closeIcon } from '../../assets/icons';
+import {
+  arrowLeftIcon,
+  calendarIcon,
+  clockIcon,
+  closeIcon,
+  starIcon
+} from '../../assets/icons';
+import { MovieNav } from '../../components/movies/movieNav';
 
 type Movie = {
   id: number;
@@ -88,8 +95,30 @@ const MovieDetail = () => {
           </View>
         </View>
         <View className="p-4">
-          {/* add nav here  */}
+          <MovieNav isSaved={isSaved} handleSaveMovie={handleSaveMovie} />
 
+          <View className="flex-row justify-between mb-4">
+            <View className="text-white rounded-full px-3 py-1 flex-row items-center">
+              <Text className="text-yellow-400 ml-1 font-bold">
+                {[1, 2, 3, 4, 5].map(star =>
+                  star <= Math.round((data?.vote_average ?? 0) / 10 / 2)
+                    ? '★'
+                    : '☆'
+                )}
+              </Text>
+              <Text className="text-white ml-1">• {data?.vote_count}</Text>
+            </View>
+            <View className=" rounded-full px-3 py-1 flex-row items-center">
+              {clockIcon}
+              {/* <Text className="text-white ml-1">{Math.floor(data.runtime / 60)}h {data?.runtime !== undefined ? data?.runtime : 0}m</Text> */}
+            </View>
+            <View className="flex-row items-center">
+              {calendarIcon}
+              <Text className="text-white ml-1">
+                Release: {data?.release_date}
+              </Text>
+            </View>
+          </View>
           <View className="mb-4">
             <Text className="text-xl font-bold text-white mb-2">Overview</Text>
             <Text className="text-white">{data?.overview}</Text>
