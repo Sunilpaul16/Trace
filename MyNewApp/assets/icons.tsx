@@ -6,8 +6,8 @@ import {
   MaterialCommunityIcons
 } from '@expo/vector-icons';
 
-const eyeShowIcon = <AntDesign name="home" size={24} color="white" />;
-const eyeHideIcon = <Entypo name="eye-with-line" size={24} color="white" />;
+const eyeShowIcon = <AntDesign name="eye" size={24} color="grey" />;
+const eyeHideIcon = <Entypo name="eye-with-line" size={24} color="grey" />;
 const homeIcon = <Entypo name="home" size={24} color="white" />;
 const bookIcon = <AntDesign name="book" size={24} color="white" />;
 const gameIcon = (

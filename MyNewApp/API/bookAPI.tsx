@@ -49,7 +49,6 @@ export interface Book {
 export const getMyBooks = async () => {
   try {
     const response = await fetch(PORT_BOOKS);
-    console.log('Books:', response);
     return await response.json();
   } catch (error) {
     console.log('Error getting Books', error);

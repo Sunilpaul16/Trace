@@ -28,7 +28,8 @@ const BookDetail = () => {
             description: json.volumeInfo.description || '',
             imageLinks: json.volumeInfo.imageLinks || { thumbnail: '' },
             averageRating: json.volumeInfo.averageRating || 0,
-            categories: json.volumeInfo.categories || []
+            categories: json.volumeInfo.categories || [],
+            volumeInfo: undefined
           };
           setData(bookData);
         })
