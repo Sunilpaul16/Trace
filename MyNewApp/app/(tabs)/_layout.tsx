@@ -46,13 +46,6 @@ const TabsLayout = () => {
           tabBarIcon: ({ color }) => movieIcon
         }}
       />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color }) => settingIcon
-        }}
-      />
     </Tabs>
   );
 };
