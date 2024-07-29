@@ -32,7 +32,7 @@ export const MovieNav = ({
     </TouchableOpacity>
     <TouchableOpacity className="items-center">
       {watchedIcon}
-      <Text className="text-xs text-white mt-1">Played</Text>
+      <Text className="text-xs text-white mt-1">Watched</Text>
     </TouchableOpacity>
     <TouchableOpacity className="items-center">
       {noteIcon}

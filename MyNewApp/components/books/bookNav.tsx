@@ -32,7 +32,7 @@ export const BookNav = ({
     </TouchableOpacity>
     <TouchableOpacity className="items-center">
       {watchedIcon}
-      <Text className="text-xs text-white mt-1">Played</Text>
+      <Text className="text-xs text-white mt-1">Read</Text>
     </TouchableOpacity>
     <TouchableOpacity className="items-center">
       {noteIcon}
