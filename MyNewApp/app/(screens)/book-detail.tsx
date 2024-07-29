@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, View, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams } from 'expo-router';
-import CustomButton from '../../components/ui/button';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   fetchBookDetail,
   postMyBook,
-  Book,
-  deleteBookFromMyBooks
+  deleteBookFromMyBooks,
+  Book
 } from '../../API/bookAPI';
+import { arrowLeftIcon, closeIcon, calendarIcon } from '../../assets/icons';
 
-const GetBooks = () => {
+const BookDetail = () => {
   const [data, setData] = useState<Book | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
   const [isSaved, setIsSaved] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (id) {
@@ -29,7 +30,7 @@ const GetBooks = () => {
           };
           setData(bookData);
         })
-        .catch(error => console.error('Failed to fetch book details:', error));
+        .catch(error => console.log('Failed to fetch book details:', error));
     }
   }, [id]);
 
@@ -38,63 +39,74 @@ const GetBooks = () => {
       try {
         if (isSaved) {
           await deleteBookFromMyBooks(data.id);
-          console.log('Book removed successfully:', data.id);
           setIsSaved(false);
         } else {
-          console.log('Attempting to save book:');
           await postMyBook(data);
-          console.log('Book saved successfully');
           setIsSaved(true);
         }
       } catch (error) {
-        console.error('Failed to save/remove book:');
+        console.log('Failed to save/remove book:', error);
       }
     }
   };
 
   if (!data) {
     return (
-      <SafeAreaView className="flex-1 bg-gray-900 justify-center items-center">
-        <Text className="text-white text-xl">Loading...</Text>
+      <SafeAreaView className="flex-1 bg-white justify-center items-center">
+        <Text className="text-xl">Loading...</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-900 p-4">
-      <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
-        <View className="bg-gray-900">
-          <Text className="text-4xl font-bold text-white mb-4">
-            {data.title}
-          </Text>
-          {data.imageLinks?.thumbnail ? (
-            <View className="flex justify-center items-center mb-4">
-              <Image
-                source={{ uri: data.imageLinks.thumbnail }}
-                className="h-[300px] w-[200px] rounded-xl"
-                resizeMode="cover"
-              />
-            </View>
-          ) : (
-            <Text className="text-white mb-4">No image available</Text>
-          )}
-          <Text className="text-xl text-white mb-4">
-            Authors: {data.authors.join(', ')}
-          </Text>
-          <Text className="text-xl text-white mb-4">
-            Published: {data.publishedDate}
-          </Text>
-          <Text className="text-lg text-white mb-4">
-            Description: {data.description}
-          </Text>
-          <CustomButton
-            title={isSaved ? 'Remove Book' : 'Save Book'}
-            handlePress={handleSaveBook}
+    <SafeAreaView className="flex-1 bg-gray-900">
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="relative">
+          <Image
+            source={{ uri: data.imageLinks?.thumbnail }}
+            className="w-full h-64"
+            resizeMode="cover"
           />
+          <View className="absolute top-4 left-4 right-4 flex-row justify-between">
+            <TouchableOpacity onPress={() => router.back()}>
+              {arrowLeftIcon}
+            </TouchableOpacity>
+            <TouchableOpacity>{closeIcon}</TouchableOpacity>
+          </View>
+          <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
+            <Image
+              source={{ uri: data.imageLinks?.thumbnail }}
+              className="w-24 h-36 rounded-lg"
+            />
+            <View className="ml-4 mb-2">
+              <Text className="text-white text-2xl font-bold">
+                {data.title}
+              </Text>
+              <Text className="text-white">{data.authors.join(', ')}</Text>
+            </View>
+          </View>
+        </View>
+
+        <View className="p-4">
+          <View className="flex-row justify-between mb-4">
+            <View className="flex-row items-center">
+              {calendarIcon}
+              <Text className="text-white ml-1">
+                Published: {data.publishedDate}
+              </Text>
+            </View>
+          </View>
+
+          <View className="mb-4">
+            <Text className="text-xl font-bold text-white mb-2">
+              Description
+            </Text>
+            <Text className="text-white ">{data.description}</Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default GetBooks;
+export default BookDetail;

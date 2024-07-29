@@ -2,7 +2,6 @@ import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import GetBooks from '../../components/books/bookList';
 import { View } from 'react-native';
-import MyBooksList from '../../components/books/myBookList';
 import SearchComponent from '../../components/ui/SearchComponent';
 
 const App = () => {

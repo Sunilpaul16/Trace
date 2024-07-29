@@ -10,7 +10,26 @@ import {
   getMyGames
 } from '../../API/gameAPI';
 import { COVER_BASE_URL } from '../../config';
-import CustomButton from '../../components/ui/button';
+
+const storeNames: { [key: number]: string } = {
+  13: 'Steam',
+  16: 'Epic Games',
+  1: 'Official',
+  2: 'Wikia',
+  3: 'Wikipedia',
+  4: 'Facebook',
+  5: 'Twitter',
+  6: 'Twitch',
+  8: 'Instagram',
+  9: 'YouTube',
+  10: 'iPhone',
+  11: 'iPad',
+  12: 'Android',
+  14: 'Reddit',
+  15: 'Itch',
+  17: 'GOG',
+  18: 'Discord'
+};
 
 const GameDetail = () => {
   const [data, setData] = useState<Game | null>(null);
@@ -21,7 +40,7 @@ const GameDetail = () => {
     if (id) {
       fetchGameDetail(Number(id))
         .then(json => setData(json))
-        .catch(error => console.error('Failed to fetch game details:', error));
+        .catch(error => console.log('Failed to fetch game details:'));
       getMyGames()
         .then(savedGames => {
           const isGameSaved = savedGames.some(
@@ -29,9 +48,7 @@ const GameDetail = () => {
           );
           setIsSaved(isGameSaved);
         })
-        .catch(error =>
-          console.error('Failed to check if game is saved:', error)
-        );
+        .catch(error => console.log('Failed to check if game is saved:'));
     }
   }, [id]);
 
@@ -45,41 +62,80 @@ const GameDetail = () => {
         }
         setIsSaved(!isSaved);
       } catch (error) {
-        console.error('Error saving game:', error);
+        console.log('Error saving game:', error);
       }
     }
   };
 
+  const formatDate = (timestamp: number | undefined) => {
+    if (!timestamp) return 'Unknown';
+    return new Date(timestamp * 1000).toLocaleDateString();
+  };
+
   return (
-    <SafeAreaView className="flex-1 bg-gray-900 p-4">
-      <ScrollView contentContainerStyle={{ paddingBottom: 16 }}>
-        {data && (
-          <>
-            <Text className="text-4xl font-bold text-white mb-4">
-              {data.name}
-            </Text>
-            <View className="flex justify-center items-center mb-4">
-              {data.cover?.image_id ? (
-                <Image
-                  source={{
-                    uri: `${COVER_BASE_URL}${data.cover.image_id}.jpg`
-                  }}
-                  className="h-[300px] w-[200px] rounded-xl"
-                />
-              ) : (
-                <Text className="text-white">No cover image available</Text>
-              )}
-            </View>
-            <Text className="text-xl text-white mb-4">
-              Release Date: {data.first_release_date}
-            </Text>
-            <Text className="text-lg text-white mb-4">{data.summary}</Text>
-            <CustomButton
-              title={isSaved ? 'Remove from My Games' : 'Save to My Games'}
-              handlePress={handleSaveGame}
+    <SafeAreaView className="flex-1 bg-gray-900">
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View className="relative">
+          <Image
+            source={{ uri: `${COVER_BASE_URL}${data?.cover?.image_id}.jpg` }}
+            className="w-full h-64"
+            resizeMode="cover"
+          />
+          <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
+            <Image
+              source={{ uri: `${COVER_BASE_URL}${data?.cover?.image_id}.jpg` }}
+              className="w-24 h-36 rounded-lg"
             />
-          </>
-        )}
+            <View className="ml-4 mb-2">
+              <Text className="text-white text-2xl font-bold">
+                {data?.name}
+              </Text>
+              {/* <Text className="text-white">{data?.genres.map(g => g.name).join(' / ')}</Text> */}
+            </View>
+          </View>
+        </View>
+
+        <View className="p-4">
+          {/* add nav here  */}
+
+          <View className="mb-4">
+            <Text className="text-xl font-bold text-white mb-2">Platforms</Text>
+            <View className="flex-row flex-wrap">
+              {data?.platforms?.map(platform => (
+                <Text
+                  key={platform.name}
+                  className="text-white mr-2 mb-2 px-2 py-1 bg-gray-800 rounded"
+                >
+                  {platform.name}
+                </Text>
+              ))}
+            </View>
+          </View>
+
+          <View className="mb-4">
+            <Text className="text-xl font-bold text-white mb-2">
+              Available in Stores
+            </Text>
+            <View className="flex-row flex-wrap">
+              {data?.websites?.map(website => {
+                const storeName = storeNames[website.category];
+                return storeName ? (
+                  <Text
+                    key={website.url}
+                    className="text-white mr-2 mb-2 px-2 py-1 bg-gray-800 rounded"
+                  >
+                    {storeName}
+                  </Text>
+                ) : null;
+              })}
+            </View>
+          </View>
+
+          <View className="mb-4">
+            <Text className="text-xl font-bold text-white mb-2">Summary</Text>
+            <Text className="text-white">{data?.summary}</Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
