@@ -39,6 +39,9 @@ export interface Book {
   imageLinks: {
     thumbnail: string;
   };
+  averageRating?: number;
+  categories?: string[];
+  pageCount?: number;
 }
 export const getMyBooks = async () => {
   try {

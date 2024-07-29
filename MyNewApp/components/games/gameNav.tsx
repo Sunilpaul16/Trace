@@ -40,21 +40,3 @@ export const GameNav = ({
     </TouchableOpacity>
   </View>
 );
-
-{
-  /* <View className="flex-row justify-between mb-4">
-            <View className="bg-yellow-500 rounded-full px-3 py-1 flex-row items-center">
-              {starIcon}
-              <Text className="text-white ml-1 font-bold">
-                {data?.aggregated_rating?.toFixed(1)}
-              </Text>
-              <Text className="text-white ml-1">• {data?.rating_count}</Text>
-            </View>
-            <View className="flex-row items-center">
-              {calendarIcon}
-              <Text className="text-white ml-1">
-                Release: {formatDate(data?.first_release_date)}
-              </Text>
-            </View>
-          </View> */
-}

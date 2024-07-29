@@ -23,7 +23,7 @@ export const BookNav = ({
     <TouchableOpacity className="items-center" onPress={handleSaveBook}>
       {isSaved ? watchedIcon : bookmarkIcon}
       <Text className="text-xs text-white mt-1">
-        {isSaved ? 'Played' : 'Wishlist'}
+        {isSaved ? 'Saved' : 'Save'}
       </Text>
     </TouchableOpacity>
     <TouchableOpacity className="items-center">

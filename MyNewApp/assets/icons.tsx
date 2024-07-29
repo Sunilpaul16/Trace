@@ -31,7 +31,13 @@ const appleIcon = <FontAwesome5 name="apple" size={24} color="black" />;
 const windowsIcon = <FontAwesome5 name="windows" size={24} color="black" />;
 
 const starIcon = <AntDesign name="star" size={24} color="yellow" />;
-const clockIcon = <AntDesign name="clockcircle" size={24} color="white" />;
+const clockIcon = (
+  <MaterialCommunityIcons
+    name="clock-time-eight-outline"
+    size={24}
+    color="white"
+  />
+);
 const calendarIcon = <AntDesign name="calendar" size={24} color="white" />;
 
 const bellIcon = (

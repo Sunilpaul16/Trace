@@ -23,7 +23,7 @@ export const MovieNav = ({
     <TouchableOpacity className="items-center" onPress={handleSaveMovie}>
       {isSaved ? watchedIcon : bookmarkIcon}
       <Text className="text-xs text-white mt-1">
-        {isSaved ? 'Played' : 'Wishlist'}
+        {isSaved ? 'Watched' : 'Waychlist'}
       </Text>
     </TouchableOpacity>
     <TouchableOpacity className="items-center">
@@ -40,25 +40,3 @@ export const MovieNav = ({
     </TouchableOpacity>
   </View>
 );
-
-{
-  /* <View className="flex-row justify-between mb-4">
-            <View className="text-white rounded-full px-3 py-1 flex-row items-center">
-              {starIcon}
-              <Text className="text-white ml-1 font-bold">
-                {data?.vote_average.toFixed(1)}
-              </Text>
-              <Text className="text-white ml-1">• {data?.vote_count}</Text>
-            </View>
-            <View className="bg-blue-500 rounded-full px-3 py-1 flex-row items-center">
-              {clockIcon}
-              <Text className="text-white ml-1">{Math.floor(data.runtime / 60)}h {data?.runtime !== undefined ? data?.runtime : 0}m</Text>
-            </View>
-            <View className="flex-row items-center">
-              {calendarIcon}
-              <Text className="text-white ml-1">
-                Release: {data?.release_date}
-              </Text>
-            </View>
-          </View> */
-}
