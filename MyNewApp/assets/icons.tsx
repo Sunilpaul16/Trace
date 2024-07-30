@@ -1,6 +1,7 @@
 import {
   AntDesign,
   Entypo,
+  Feather,
   FontAwesome5,
   Ionicons,
   MaterialCommunityIcons
@@ -8,14 +9,22 @@ import {
 
 const eyeShowIcon = <AntDesign name="eye" size={24} color="grey" />;
 const eyeHideIcon = <Entypo name="eye-with-line" size={24} color="grey" />;
-const homeIcon = <Entypo name="home" size={24} color="white" />;
-const bookIcon = <AntDesign name="book" size={24} color="white" />;
-const gameIcon = (
+const inactiveHomeIcon = <Entypo name="home" size={24} color="white" />;
+const activeHomeIcon = <Entypo name="home" size={24} color="#e6a139" />;
+const inactiveBookIcon = <AntDesign name="book" size={24} color="white" />;
+const activeBookIcon = <AntDesign name="book" size={24} color="#e6a139" />;
+const inactiveGameIcon = (
   <Ionicons name="game-controller-outline" size={24} color="white" />
 );
+const activeGameIcon = (
+  <Ionicons name="game-controller-outline" size={24} color="#e6a139" />
+);
 
-const movieIcon = (
+const inactiveMovieIcon = (
   <MaterialCommunityIcons name="movie-open-outline" size={24} color="white" />
+);
+const activeMovieIcon = (
+  <MaterialCommunityIcons name="movie-open-outline" size={24} color="#e6a139" />
 );
 const searchIcon = <AntDesign name="search1" size={24} color="white" />;
 
@@ -64,14 +73,19 @@ const menuIcon = <AntDesign name="menufold" size={24} color="black" />;
 const menuUnfoldIcon = <AntDesign name="menuunfold" size={24} color="black" />;
 const settingIcon = <AntDesign name="setting" size={24} color="black" />;
 const userIcon = <AntDesign name="user" size={24} color="black" />;
+const micIcon = <Feather name="mic" size={24} color="black" />;
+const cameraIcon = <Feather name="camera" size={24} color="black" />;
+const crossIcon = <Entypo name="cross" size={24} color="black" />;
 
 export {
   eyeShowIcon,
   eyeHideIcon,
-  homeIcon,
-  bookIcon,
-  gameIcon,
-  movieIcon,
+  inactiveBookIcon,
+  activeBookIcon,
+  inactiveGameIcon,
+  activeGameIcon,
+  inactiveMovieIcon,
+  activeMovieIcon,
   searchIcon,
   steamIcon,
   epicIcon,
@@ -97,5 +111,10 @@ export {
   menuIcon,
   menuUnfoldIcon,
   settingIcon,
-  userIcon
+  userIcon,
+  micIcon,
+  cameraIcon,
+  crossIcon,
+  activeHomeIcon,
+  inactiveHomeIcon
 };

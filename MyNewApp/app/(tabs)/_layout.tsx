@@ -1,18 +1,23 @@
 import { Tabs } from 'expo-router';
 
 import {
-  homeIcon,
-  bookIcon,
-  gameIcon,
-  movieIcon,
-  settingIcon
+  activeBookIcon,
+  activeGameIcon,
+  activeHomeIcon,
+  activeMovieIcon,
+  inactiveBookIcon,
+  inactiveGameIcon,
+  inactiveHomeIcon,
+  inactiveMovieIcon
 } from '../../assets/icons';
+import React from 'react';
 
 const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#FF0000',
+        tabBarActiveTintColor: '#e6a139',
+        tabBarInactiveTintColor: '#e6a139',
         tabBarStyle: {
           backgroundColor: '#111827'
         }
@@ -21,29 +26,44 @@ const TabsLayout = () => {
       <Tabs.Screen
         name="home"
         options={{
+          tabBarLabelStyle: { display: 'none' },
+
           headerShown: false,
-          tabBarIcon: ({ color }) => homeIcon
+          tabBarIcon: ({ focused, color }) =>
+            focused ? activeHomeIcon : inactiveHomeIcon,
+          tabBarLabel: 'Home'
         }}
       />
       <Tabs.Screen
         name="books"
         options={{
+          tabBarLabelStyle: { display: 'none' },
+
           headerShown: false,
-          tabBarIcon: ({ color }) => bookIcon
+          tabBarIcon: ({ focused, color }) =>
+            focused ? activeBookIcon : inactiveBookIcon,
+
+          tabBarLabel: 'Books'
         }}
       />
       <Tabs.Screen
         name="games"
         options={{
+          tabBarLabelStyle: { display: 'none' },
+
           headerShown: false,
-          tabBarIcon: ({ color }) => gameIcon
+          tabBarIcon: ({ focused, color }) =>
+            focused ? activeGameIcon : inactiveGameIcon,
+          tabBarLabel: 'Games'
         }}
       />
       <Tabs.Screen
         name="movies"
         options={{
+          tabBarLabelStyle: { display: 'none' },
           headerShown: false,
-          tabBarIcon: ({ color }) => movieIcon
+          tabBarIcon: ({ focused, color }) =>
+            focused ? activeMovieIcon : inactiveMovieIcon
         }}
       />
     </Tabs>
