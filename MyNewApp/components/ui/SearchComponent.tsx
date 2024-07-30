@@ -1,64 +1,59 @@
 import React, { useState } from 'react';
 import {
-  TextInput,
   View,
   Text,
+  Image,
+  TouchableOpacity,
   FlatList,
-  TouchableOpacity
+  TextInput
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { searchIcon } from '../../assets/icons';
+import { Book } from '../../API/bookAPI';
+import { router } from 'expo-router';
+import { MY_BOOK_API_KEY } from '../../config';
 
-const SearchComponent = ({
-  data
-}: {
-  data: Array<{ id: number; title: string }>;
-}) => {
+const BookSearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredData, setFilteredData] = useState(data);
+  const [searchResults, setSearchResults] = useState<Book[]>([]);
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
-    if (query) {
-      const newData = data.filter(item =>
-        item.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredData(newData);
-    } else {
-      setFilteredData(data);
-    }
+  const searchBooks = async () => {
+    const response = await fetch(
+      `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&key=${MY_BOOK_API_KEY}`
+    );
+    const data = await response.json();
+    setSearchResults(data.items || []);
   };
 
-  const clearSearch = () => {
-    setSearchQuery('');
-    setFilteredData(data);
-  };
+  const renderBookItem = ({ item }: { item: Book }) => (
+    <TouchableOpacity onPress={() => router.push(`/book-detail?id=${item.id}`)}>
+      <View style={{ flexDirection: 'row', padding: 10 }}>
+        <Image
+          source={{ uri: item.volumeInfo.imageLinks?.thumbnail }}
+          style={{ width: 50, height: 75, marginRight: 10 }}
+        />
+        <View>
+          <Text>{item.volumeInfo.title}</Text>
+          <Text>{item.volumeInfo.authors?.join(', ')}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-900 ">
-      <View className="flex-row items-center bg-gray-800 -mt-2 p-2 h-12 rounded-xl mb-4">
-        <TextInput
-          value={searchQuery}
-          onChangeText={handleSearch}
-          placeholder="Search..."
-          placeholderTextColor="#999"
-          className="text-white flex-1"
-        />
-        <TouchableOpacity onPress={clearSearch} className="ml-2">
-          {searchIcon}
-        </TouchableOpacity>
-      </View>
-      <FlatList
-        data={filteredData}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }) => (
-          <View className="bg-gray-800 p-4 mb-4 rounded-xl">
-            <Text className="text-white text-lg">{item.title}</Text>
-          </View>
-        )}
+    <View style={{ flex: 1 }}>
+      <TextInput
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder="Search books"
+        onSubmitEditing={searchBooks}
+        style={{ padding: 10, borderBottomWidth: 1 }}
       />
-    </SafeAreaView>
+      <FlatList
+        data={searchResults}
+        renderItem={renderBookItem}
+        keyExtractor={item => item.id}
+      />
+    </View>
   );
 };
 
-export default SearchComponent;
+export default BookSearch;
