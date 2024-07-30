@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import React, { useState } from 'react';
-import CustomButton from '../../components/ui/buttonComponent';
+import CustomButton from '../../components/ui/ButtonComponent';
 import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { eyeHideIcon, eyeShowIcon } from '../../assets/icons';
@@ -20,12 +20,12 @@ const SignIn = () => {
         <View className="w-full h-full justify-center px-6 bg-slategray bg-gray-900">
           <Text className="text-2xl text-white">Email</Text>
           <TextInput
-            className="border-2 border-gray-400 rounded-lg p-3 my-3  text-white"
+            className="border-2 border-gray-400 rounded-2xl p-3 my-3   text-white"
             keyboardType="email-address"
             autoCapitalize="none"
           />
           <Text className="text-2xl text-white">Password</Text>
-          <View className="flex-row items-center border-2 border-gray-400 rounded-lg px-3 my-3 ">
+          <View className="flex-row items-center border-2 border-gray-400 rounded-2xl px-3 my-3 ">
             <TextInput
               className="flex-1 p-3 text-white"
               secureTextEntry={!showPassword}

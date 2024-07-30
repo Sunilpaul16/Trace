@@ -6,7 +6,7 @@ import {
   View
 } from 'react-native';
 import React from 'react';
-import CustomButton from '../../components/ui/buttonComponent';
+import CustomButton from '../../components/ui/ButtonComponent';
 import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Entypo } from '@expo/vector-icons';
@@ -39,7 +39,7 @@ const SignUp = () => {
             </TouchableOpacity>
           </View>
           <Text className="text-2xl text-white">Confirm Password</Text>
-          <View className="flex-row items-center border-2 border-gray-400 rounded-lg px-3 my-3 ">
+          <View className="flex-row items-center border-2 border-gray-400 rounded-2xl px-3 my-3 ">
             <TextInput
               className="flex-1 p-3 text-white"
               secureTextEntry={!showPassword}

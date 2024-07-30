@@ -74,9 +74,7 @@ export const fetchGameDetail = async (id: number): Promise<Game> => {
     }
 
     const games = await response.json();
-    if (games.length === 0) {
-      throw new Error(`No game found with id ${id}`);
-    }
+
     return games[0];
   } catch (error) {
     console.log('Failed to fetch game details:', error);
