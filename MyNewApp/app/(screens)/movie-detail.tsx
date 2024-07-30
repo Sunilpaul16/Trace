@@ -16,20 +16,7 @@ import {
   starIcon
 } from '../../assets/icons';
 import { MovieNav } from '../../components/movies/movieNav';
-
-type Movie = {
-  id: number;
-  title: string;
-  release_date: string;
-  releaseDate: string;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-  runtime: number;
-  genres: { name: string }[];
-};
+import { Movie } from '../../API/movieAPI';
 
 const MovieDetail = () => {
   const [data, setData] = useState<Movie | null>(null);
@@ -70,7 +57,7 @@ const MovieDetail = () => {
         <View className="relative">
           <Image
             source={{ uri: `${IMAGE_BASE_URL}${data?.backdrop_path}` }}
-            className="w-full h-64"
+            className="w-full h-64 opacity-25"
             resizeMode="cover"
           />
           <View className="absolute top-4 left-4 right-4 flex-row justify-between">
@@ -88,15 +75,24 @@ const MovieDetail = () => {
               <Text className="text-white text-2xl font-bold">
                 {data?.title}
               </Text>
-              <Text className="text-white">
-                {data?.genres.map(g => g.name).join(' / ')}
-              </Text>
             </View>
           </View>
         </View>
-        <View className="p-4">
-          <MovieNav isSaved={isSaved} handleSaveMovie={handleSaveMovie} />
 
+        <View className="p-4" />
+        <MovieNav isSaved={isSaved} handleSaveMovie={handleSaveMovie} />
+        <View className="mb-4">
+          <Text className="text-xl font-bold text-white mb-2 p-3">Genres</Text>
+          <View className="flex-row flex-wrap p-2">
+            {data?.genres.map(genre => (
+              <View
+                key={genre.name}
+                className="bg-gray-800 rounded-full px-3 py-1 mr-2 mb-2"
+              >
+                <Text className="text-white">{genre.name}</Text>
+              </View>
+            ))}
+          </View>
           <View className="flex-row justify-between mb-4">
             <View className="text-white rounded-full px-3 py-1 flex-row items-center">
               <Text className="text-yellow-400 ml-1 font-bold">
@@ -114,12 +110,12 @@ const MovieDetail = () => {
             </View>
             <View className="flex-row items-center">
               {calendarIcon}
-              <Text className="text-white ml-1">
+              <Text className="text-white ml-1 p-2">
                 Release: {data?.release_date}
               </Text>
             </View>
           </View>
-          <View className="mb-4">
+          <View className="mb-4 p-3">
             <Text className="text-xl font-bold text-white mb-2">Overview</Text>
             <Text className="text-white">{data?.overview}</Text>
           </View>

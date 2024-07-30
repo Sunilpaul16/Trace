@@ -2,10 +2,11 @@ import {
   GAME_API_KEY,
   PORT_GAMES,
   GAME_BASE_URL,
-  GAME_ACCESS_TOKEN
+  GAME_ACCESS_TOKEN,
+  PORT_GAMES_2
 } from '../config';
 
-export interface Game {
+export type Game = {
   id: number;
   name: string;
   cover?: {
@@ -20,8 +21,9 @@ export interface Game {
   game_modes?: { name: string }[];
   rating_count?: number;
   total_rating_count?: number;
+  screenshots?: { image_id: string }[];
   websites?: { category: number; url: string }[];
-}
+};
 export const fetchGames = async () => {
   const currentDate = Math.floor(Date.now() / 1000);
   const oneYearAgo = currentDate - 365 * 24 * 60 * 60;
@@ -64,7 +66,7 @@ export const fetchGameDetail = async (id: number): Promise<Game> => {
       },
       body: `fields name,cover.image_id,aggregated_rating,first_release_date,
       summary,storyline,platforms.name,involved_companies.company.name,game_modes.name,
-      rating_count,total_rating_count,websites.category,websites.url; where id = ${id};`
+      rating_count,total_rating_count,websites.category,screenshots,websites.url; where id = ${id};`
     });
     if (!response.ok) {
       const errorBody = await response.text();

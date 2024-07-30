@@ -20,14 +20,14 @@ const SignIn = () => {
         <View className="w-full h-full justify-center px-6 bg-slategray bg-gray-900">
           <Text className="text-2xl text-white">Email</Text>
           <TextInput
-            className="border-2 border-gray-400 rounded-2xl p-3 my-3   text-white"
+            className="border-2 h-[45px] border-gray-400 rounded-lg p-3 my-3   text-white"
             keyboardType="email-address"
             autoCapitalize="none"
           />
           <Text className="text-2xl text-white">Password</Text>
-          <View className="flex-row items-center border-2 border-gray-400 rounded-2xl px-3 my-3 ">
+          <View className="flex-row items-center border-2 border-gray-400 rounded-lg px-3 my-3 ">
             <TextInput
-              className="flex-1 p-3 text-white"
+              className="flex-1 p-3 h-[45px] text-white"
               secureTextEntry={!showPassword}
               autoCapitalize="none"
             />
@@ -38,11 +38,13 @@ const SignIn = () => {
           <CustomButton
             title="Sign-In"
             handlePress={() => router.push('/home')}
+            containerStyles="bg-orange-400 w-full h-[45px] rounded-lg mt-4  flex items-center justify-center"
+            textStyles={undefined}
           />
           <Text className="my-3 text-white">Forgot Password?</Text>
           <Text className="my-3 text-white">
             Don't have an account?
-            <Link href="/signup" className="text-red-500">
+            <Link href="/signup" className="text-orange-400">
               Sign-Up
             </Link>
           </Text>

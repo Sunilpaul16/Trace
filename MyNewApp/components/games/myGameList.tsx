@@ -49,10 +49,6 @@ const MyGamesList = () => {
     </TouchableOpacity>
   );
 
-  if (games.length === 0) {
-    return <Text className="text-white">No books found</Text>;
-  }
-
   return (
     <FlatList
       data={games}

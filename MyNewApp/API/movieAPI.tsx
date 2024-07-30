@@ -30,16 +30,19 @@ export const fetchMovieDetail = async (id: any) => {
     console.log('Failed to fetch movie details:', error);
   }
 };
-export interface Movie {
+export type Movie = {
   id: number;
   title: string;
   release_date: string;
+  releaseDate: string;
   vote_average: number;
+  vote_count: number;
   overview: string;
   poster_path: string;
   backdrop_path: string;
-  runtime?: number;
-}
+  runtime: number;
+  genres: { name: string }[];
+};
 export const getMyMovies = async () => {
   try {
     const response = await fetch(PORT_MOVIES);

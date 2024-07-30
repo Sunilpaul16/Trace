@@ -4,6 +4,7 @@ import { fetchGames, Game } from '../../API/gameAPI';
 import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { COVER_BASE_URL } from '../../config';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import GameSearch from './GameSearch';
 
 const GetGames = () => {
   const [games, setGames] = useState<Game[]>([]);
@@ -44,11 +45,18 @@ const GetGames = () => {
         data={games}
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ padding: 7 }}
         ListHeaderComponent={
-          <Text className="text-4xl text-white font-bold mb-3 -mt-4 ">
-            Games
-          </Text>
+          <>
+            <View>
+              <Text className="text-4xl text-orange-400 justify-center text-center font-bold -mt-2 ">
+                Games
+              </Text>
+            </View>
+            <View className="bg-gray-900 p-2 rounded-lg ">
+              <GameSearch />
+            </View>
+          </>
         }
       />
     </SafeAreaView>

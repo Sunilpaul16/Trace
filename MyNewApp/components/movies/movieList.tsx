@@ -4,6 +4,7 @@ import { fetchMovies } from '../../API/movieAPI';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { IMAGE_BASE_URL } from '../../config';
+import MovieSearch from './MovieSearch';
 
 type Movie = {
   id: number;
@@ -60,11 +61,17 @@ const GetMovies = () => {
         data={data}
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
-        contentContainerStyle={{ padding: 16 }}
+        contentContainerStyle={{ padding: 7 }}
         ListHeaderComponent={
-          <Text className="text-4xl text-white font-bold mb-3 -mt-4 ">
-            Movies
-          </Text>
+          <>
+            <Text className="text-4xl text-orange-400 justify-center text-center font-bold -mt-2 ">
+              Movies
+            </Text>
+            <View className="bg-gray-900 p-2 rounded-lg ">
+              <MovieSearch />
+            </View>
+            <View></View>
+          </>
         }
       />
     </SafeAreaView>

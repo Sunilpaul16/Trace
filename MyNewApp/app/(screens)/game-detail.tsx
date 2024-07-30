@@ -9,10 +9,10 @@ import {
   postMyGame,
   getMyGames
 } from '../../API/gameAPI';
-import { COVER_BASE_URL } from '../../config';
+import { COVER_BASE_URL, SCREENSHOT_BASE_URL } from '../../config';
 import { GameNav } from '../../components/games/gameNav';
 
-const storeNames: { [key: number]: string } = {
+export const storeNames: { [key: number]: string } = {
   13: 'Steam',
   16: 'Epic Games',
   1: 'Official',
@@ -79,7 +79,7 @@ const GameDetail = () => {
         <View className="relative">
           <Image
             source={{ uri: `${COVER_BASE_URL}${data?.cover?.image_id}.jpg` }}
-            className="w-full h-64"
+            className="w-full h-64 opacity-25"
             resizeMode="cover"
           />
           <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
@@ -88,10 +88,9 @@ const GameDetail = () => {
               className="w-24 h-36 rounded-lg"
             />
             <View className="ml-4 mb-2">
-              <Text className="text-white text-2xl font-bold">
+              <Text className="text-white text-2xl font-bold flex-1 flex-shrink">
                 {data?.name}
               </Text>
-              {/* <Text className="text-white">{data?.genres.map(g => g.name).join(' / ')}</Text> */}
             </View>
           </View>
         </View>
@@ -102,7 +101,7 @@ const GameDetail = () => {
           <View className="mb-4">
             <Text className="text-xl font-bold text-white mb-2">Platforms</Text>
             <View className="flex-row flex-wrap">
-              {data?.platforms?.map(platform => (
+              {data?.platforms?.slice(0, 2).map(platform => (
                 <Text
                   key={platform.name}
                   className="text-white mr-2 mb-2 px-2 py-1 bg-gray-800 rounded"
@@ -113,7 +112,7 @@ const GameDetail = () => {
             </View>
           </View>
           <View className="flex-row justify-between mb-4">
-            <View className="rounded-full px-3 py-1 flex-row items-center">
+            <View className="rounded-full py-1 flex-row items-center">
               {[1, 2, 3, 4, 5].map(star => (
                 <Text className="text-yellow-400" key={star}>
                   {star <= Math.round((data?.aggregated_rating ?? 0) / 10 / 2)
