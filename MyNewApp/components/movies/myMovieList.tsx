@@ -52,6 +52,9 @@ const MyMoviesList = () => {
       </View>
     </TouchableOpacity>
   );
+  if (movies.length === 0) {
+    return <Text className="text-white">No books found</Text>;
+  }
 
   return (
     <FlatList

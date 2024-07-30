@@ -6,12 +6,15 @@ import { COVER_BASE_URL } from '../../config';
 
 const MyGamesList = () => {
   const [games, setGames] = useState<Game[]>([]);
+
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     const fetchGames = async () => {
       try {
         const fetchedGames = await getMyGames();
+        console.log('Fetched games in component:');
         setGames(fetchedGames);
       } catch (error) {
         console.log('Error fetching games:', error);
@@ -45,6 +48,10 @@ const MyGamesList = () => {
       </View>
     </TouchableOpacity>
   );
+
+  if (games.length === 0) {
+    return <Text className="text-white">No books found</Text>;
+  }
 
   return (
     <FlatList

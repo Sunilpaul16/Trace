@@ -1,41 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator
-} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { fetchBooks, Book } from '../../API/bookAPI';
+import { getMyBooks, Book } from '../../API/bookAPI';
 
 const MyBooksList = () => {
   const [books, setBooks] = useState<Book[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchBooksData = async () => {
+    const fetchBooks = async () => {
       try {
-        setLoading(true);
-        const fetchedBooks = await fetchBooks();
+        const fetchedBooks = await getMyBooks();
         console.log('Fetched books in component:');
-        if (Array.isArray(fetchedBooks)) {
-          setBooks(fetchedBooks);
-        } else {
-          setError('Invalid data format received');
-        }
+        setBooks(fetchedBooks);
       } catch (error) {
-        console.error('Error fetching books:', error);
-        setError('Failed to fetch books');
-      } finally {
-        setLoading(false);
+        console.log('Error fetching books:', error);
       }
     };
-
-    fetchBooksData();
   }, []);
 
   const renderItem = ({ item }: { item: Book }) => (
@@ -62,14 +43,6 @@ const MyBooksList = () => {
       </View>
     </TouchableOpacity>
   );
-
-  if (loading) {
-    return <ActivityIndicator size="large" color="#ffffff" />;
-  }
-
-  if (error) {
-    return <Text className="text-white">{error}</Text>;
-  }
 
   if (books.length === 0) {
     return <Text className="text-white">No books found</Text>;
