@@ -18,6 +18,7 @@ const MyMoviesList = () => {
     const fetchMovies = async () => {
       try {
         const fetchedMovies = await getMyMovies();
+        console.log('Fetched movies in component:');
         setMovies(fetchedMovies);
       } catch (error) {
         console.log('Error fetching movies:', error);
@@ -52,9 +53,6 @@ const MyMoviesList = () => {
       </View>
     </TouchableOpacity>
   );
-  if (movies.length === 0) {
-    return <Text className="text-white">No books found</Text>;
-  }
 
   return (
     <FlatList
