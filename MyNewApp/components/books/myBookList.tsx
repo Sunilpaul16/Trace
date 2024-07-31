@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { getMyBooks, Book } from '../../API/bookAPI';
+import { getMyBooks } from '../../API/bookAPI';
+import { Book } from '../../API/typesFile';
 
 const MyBooksList = () => {
   const [books, setBooks] = useState<Book[] | undefined>([]);
@@ -10,9 +11,9 @@ const MyBooksList = () => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const fetchedBooks = await getMyBooks();
-        console.log('Fetched books in component:');
-        setBooks(fetchedBooks);
+        const response = await getMyBooks();
+        console.log('fetchBooks books in component: success');
+        setBooks(response);
       } catch (error) {
         console.log('Error fetching books:', error);
       }
@@ -21,16 +22,13 @@ const MyBooksList = () => {
   }, []);
 
   const renderItem = ({ item }: { item: Book }) => (
-    console.log('Rendering book:', item.volumeInfo?.imageLinks.thumbnail),
-    (
-      <TouchableOpacity
-        onPress={() => router.push(`/book-detail?id=${item.id}`)}
-      >
+    <TouchableOpacity onPress={() => router.push(`/book-detail?id=${item.id}`)}>
+      <View className="bg-gray-900 mb-4 rounded-lg">
         <View className="mr-4 mb-2">
           {item.volumeInfo?.imageLinks?.thumbnail ? (
             <>
               <Image
-                source={{ uri: item.volumeInfo?.imageLinks?.thumbnail }}
+                source={{ uri: item.volumeInfo?.imageLinks.thumbnail }}
                 className="h-[150px] w-[100px] rounded-lg"
               />
               <Text
@@ -46,8 +44,8 @@ const MyBooksList = () => {
             </View>
           )}
         </View>
-      </TouchableOpacity>
-    )
+      </View>
+    </TouchableOpacity>
   );
 
   return (

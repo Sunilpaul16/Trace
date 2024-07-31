@@ -5,16 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { IMAGE_BASE_URL } from '../../config';
 import MovieSearch from './MovieSearch';
-
-type Movie = {
-  id: number;
-  title: string;
-  release_date: string;
-  vote_average: number;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-};
+import { Movie } from '../../API/typesFile';
 
 const GetMovies = () => {
   const [data, setData] = useState<Movie[]>([]);
@@ -36,21 +27,37 @@ const GetMovies = () => {
     <TouchableOpacity
       onPress={() => router.push(`/movie-detail?id=${item.id}`)}
     >
-      <View className="bg-gray-900 p-4 mb-4 rounded-lg">
-        <Text className="text-2xl font-bold text-white">{item.title}</Text>
-        <Text className="text-lg text-white mb-2">
-          {item.release_date.split('-')[0]} | Rating:{' '}
-          {item.vote_average.toFixed(1)}
-        </Text>
-        {item.poster_path ? (
-          <Image
-            source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
-            className="h-[200px] w-[150px] rounded-xl"
-            resizeMode="cover"
-          />
-        ) : (
-          <Text className="text-lg text-white">No poster available</Text>
-        )}
+      <View className="bg-gray-900 p-4 mb-4 rounded-lg flex-row">
+        <View className="mr-4">
+          {item.poster_path ? (
+            <Image
+              source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
+              className="h-[200px] w-[150px] rounded-xl"
+              resizeMode="cover"
+            />
+          ) : (
+            <View className="h-[200px] w-[150px] bg-gray-700 rounded-xl flex items-center justify-center">
+              <Text className="text-white text-center">
+                No poster available
+              </Text>
+            </View>
+          )}
+        </View>
+        <View className="flex-1 justify-between">
+          <View className=" p-2 rounded mb-2">
+            <Text className="text-2xl font-bold text-white" numberOfLines={2}>
+              {item.title}
+            </Text>
+          </View>
+          <View className="p-2 rounded">
+            <Text className="text-white text-lg">
+              Ratings: {item.vote_average}
+            </Text>
+          </View>
+          <View className=" p-2 rounded">
+            <Text className="text-lg text-white">Details</Text>
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );
