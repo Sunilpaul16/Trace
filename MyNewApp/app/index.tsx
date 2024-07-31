@@ -13,11 +13,11 @@ export default function App() {
             resizeMode="contain"
             className="w-[130px] h-[85px] mt-8 "
           />
-          {/* <Image
-              source={require('../assets/placeholder.png')}
-              className="max-w-[380px] w-full h-[300px] mt-8 rounded-2xl"
-              resizeMode="cover"
-            /> */}
+          <Image
+            source={require('../assets/index.png')}
+            className="max-w-[380px] w-full h-[300px] mt-8 rounded-2xl"
+            resizeMode="cover"
+          />
           <View className="mt-8">
             <Text className="text-3xl text-white font-bold text-center mt-9">
               Unlock the story of your virtual life with{' '}
@@ -40,6 +40,7 @@ export default function App() {
           </View>
         </View>
       </ScrollView>
+      <StatusBar backgroundColor="#161622" />
     </SafeAreaView>
   );
 }

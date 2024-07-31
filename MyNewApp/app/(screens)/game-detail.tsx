@@ -88,7 +88,10 @@ const GameDetail = () => {
               className="w-24 h-36 rounded-lg"
             />
             <View className="ml-4 mb-2">
-              <Text className="text-white text-2xl font-bold w-[300px]">
+              <Text
+                className="text-white text-2xl font-bold w-[300px]"
+                numberOfLines={2}
+              >
                 {data?.name}
               </Text>
             </View>
