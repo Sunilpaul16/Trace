@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import {
   bellIcon,
+  bellIconOrange,
   watchedIcon,
+  watchedIconOrange,
   bookmarkIcon,
+  bookmarkIconOrange,
   listIcon,
-  noteIcon
+  listIconOrange,
+  noteIcon,
+  noteIconOrange
 } from '../../assets/icons';
 
 export const MovieNav = ({
@@ -14,29 +19,48 @@ export const MovieNav = ({
 }: {
   isSaved: boolean;
   handleSaveMovie: () => void;
-}) => (
-  <View className="flex-row justify-around mb-4">
-    <TouchableOpacity className="items-center">
-      {bellIcon}
-      <Text className="text-xs text-white mt-1">Reminder</Text>
-    </TouchableOpacity>
-    <TouchableOpacity className="items-center" onPress={handleSaveMovie}>
-      {isSaved ? watchedIcon : bookmarkIcon}
-      <Text className="text-xs text-white mt-1">
-        {isSaved ? 'Watched' : 'Waychlist'}
-      </Text>
-    </TouchableOpacity>
-    <TouchableOpacity className="items-center">
-      {listIcon}
-      <Text className="text-xs text-white mt-1">Add to list</Text>
-    </TouchableOpacity>
-    <TouchableOpacity className="items-center">
-      {watchedIcon}
-      <Text className="text-xs text-white mt-1">Watched</Text>
-    </TouchableOpacity>
-    <TouchableOpacity className="items-center">
-      {noteIcon}
-      <Text className="text-xs text-white mt-1">Note</Text>
-    </TouchableOpacity>
-  </View>
-);
+}) => {
+  const [isReminder, setIsReminder] = useState(false);
+  const [isAddedToList, setIsAddedToList] = useState(false);
+  const [isWatched, setIsWatched] = useState(false);
+  const [isNoted, setIsNoted] = useState(false);
+
+  return (
+    <View className="flex-row justify-around mb-4">
+      <TouchableOpacity
+        className="items-center"
+        onPress={() => setIsReminder(!isReminder)}
+      >
+        {isReminder ? bellIconOrange : bellIcon}
+        <Text className="text-xs text-white mt-1">Reminder</Text>
+      </TouchableOpacity>
+      <TouchableOpacity className="items-center" onPress={handleSaveMovie}>
+        {isSaved ? bookmarkIconOrange : bookmarkIcon}
+        <Text className="text-xs text-white mt-1">
+          {isSaved ? 'Saved' : 'Watchlist'}
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="items-center"
+        onPress={() => setIsAddedToList(!isAddedToList)}
+      >
+        {isAddedToList ? listIconOrange : listIcon}
+        <Text className="text-xs text-white mt-1">Add to list</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="items-center"
+        onPress={() => setIsWatched(!isWatched)}
+      >
+        {isWatched ? watchedIconOrange : watchedIcon}
+        <Text className="text-xs text-white mt-1">Watched</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        className="items-center"
+        onPress={() => setIsNoted(!isNoted)}
+      >
+        {isNoted ? noteIconOrange : noteIcon}
+        <Text className="text-xs text-white mt-1">Note</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
