@@ -3,7 +3,6 @@ import {
   PORT_GAMES,
   GAME_BASE_URL,
   GAME_ACCESS_TOKEN,
-  PORT_GAMES_2
 } from '../config';
 import { Game } from './typesFile';
 
