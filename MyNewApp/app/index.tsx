@@ -3,7 +3,7 @@ import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../components/ui/ButtonComponent';
 
-export default function App() {
+export default function Trace() {
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
       <ScrollView contentContainerStyle={{ height: '100%' }}>
