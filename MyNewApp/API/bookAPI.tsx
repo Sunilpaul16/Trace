@@ -18,7 +18,8 @@ export const fetchBooks = async () => {
     return [];
   }
 };
-export const fetchBookDetail = async (id: any) => {
+
+export const fetchBookDetail = async (id: string) => {
   try {
     const response = await fetch(
       `${BOOK_BASE_URL}${id}?key=${MY_BOOK_API_KEY}`
@@ -32,26 +33,32 @@ export const fetchBookDetail = async (id: any) => {
     throw error;
   }
 };
-export interface Book {
-  volumeInfo: any;
+
+export type Book = {
   id: string;
-  title: string;
-  authors: string[];
-  publishedDate: string;
-  description: string;
-  imageLinks: {
-    thumbnail: string;
+  volumeInfo: {
+    title: string;
+    authors: string[];
+    publishedDate: string;
+    description: string;
+    imageLinks: {
+      thumbnail?: string;
+    };
+    averageRating?: number;
+    categories?: string[];
+    pageCount?: number;
   };
-  averageRating?: number;
-  categories?: string[];
-  pageCount?: number;
-}
-export const getMyBooks = async () => {
+};
+
+export const getMyBooks = async (): Promise<Book[] | undefined> => {
   try {
     const response = await fetch(PORT_BOOKS);
-    return await response.json();
+    const data = await response.json();
+    console.log('Books:');
+    return data;
   } catch (error) {
     console.log('Error getting Books', error);
+    throw error;
   }
 };
 
@@ -74,7 +81,7 @@ export const postMyBook = async (book: Book): Promise<Book> => {
   }
 };
 
-export const deleteBookFromMyBooks = async (id: string): Promise<void> => {
+export const deleteBookFromMyBooks = async (id: any): Promise<void> => {
   try {
     const response = await fetch(`${PORT_BOOKS}/${id}`, {
       method: 'DELETE'
