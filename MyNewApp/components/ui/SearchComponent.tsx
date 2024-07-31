@@ -7,7 +7,7 @@ import {
   FlatList,
   TextInput
 } from 'react-native';
-import { Book } from '../../API/bookAPI';
+import { Book } from '../../API/typesFile';
 import { router } from 'expo-router';
 import { MY_BOOK_API_KEY } from '../../config';
 
@@ -39,14 +39,20 @@ const BookSearch = () => {
   );
 
   return (
-    <View style={{ flex: 1 }}>
+    <View className="flex-1">
       <TextInput
         value={searchQuery}
         onChangeText={setSearchQuery}
         placeholder="Search books"
-        onSubmitEditing={searchBooks}
-        style={{ padding: 10, borderBottomWidth: 1 }}
+        className="p-4 border-2 bg-whitemb-2 text-red-500"
+        placeholderTextColor="#FF0000"
       />
+      <TouchableOpacity
+        onPress={searchBooks}
+        className="p-2 border-2 rounded-md"
+      >
+        <Text className="text-center text-red-500">Search</Text>
+      </TouchableOpacity>
       <FlatList
         data={searchResults}
         renderItem={renderBookItem}

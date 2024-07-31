@@ -5,41 +5,28 @@ import { useLocalSearchParams } from 'expo-router';
 import {
   deleteBookFromMyBooks,
   fetchBookDetail,
-  Book,
   postMyBook,
   getMyBooks
 } from '../../API/bookAPI';
 import { BookNav } from '../../components/books/bookNav';
+import { Book } from '../../API/typesFile';
 
 const BookDetail = () => {
   const [data, setData] = useState<Book | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
-  const [isSaved, setIsSaved] = useState(false);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
 
   useEffect(() => {
     if (id) {
       fetchBookDetail(id)
-        .then(json => {
-          const bookData: Book = {
-            id: json.id,
-            title: json.volumeInfo.title,
-            authors: json.volumeInfo.authors || [],
-            publishedDate: json.volumeInfo.publishedDate || '',
-            description: json.volumeInfo.description || '',
-            imageLinks: json.volumeInfo.imageLinks || { thumbnail: '' },
-            averageRating: json.volumeInfo.averageRating || 0,
-            categories: json.volumeInfo.categories || [],
-            volumeInfo: undefined
-          };
+        .then(bookData => {
           setData(bookData);
         })
         .catch(error => console.log('Failed to fetch book details:', error));
       getMyBooks()
         .then(savedBooks => {
-          const isBookSaved = savedBooks.some(
-            (book: { id: string }) => book.id === id
-          );
-          setIsSaved(isBookSaved);
+          const isBookSaved = savedBooks?.some(book => book.id === id);
+          setIsSaved(isBookSaved || false);
         })
         .catch(error =>
           console.log('Failed to check if book is saved:', error)
@@ -67,25 +54,34 @@ const BookDetail = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
+  if (!data) {
+    return <Text>Loading...</Text>;
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative">
           <Image
-            source={{ uri: data?.imageLinks?.thumbnail }}
-            className="w-full h-64"
+            source={{ uri: data.volumeInfo.imageLinks?.thumbnail }}
+            className="w-full h-64  opacity-25"
             resizeMode="cover"
           />
           <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
             <Image
-              source={{ uri: data?.imageLinks?.thumbnail }}
+              source={{ uri: data.volumeInfo.imageLinks?.thumbnail }}
               className="w-24 h-36 rounded-lg"
             />
             <View className="ml-4 mb-2">
-              <Text className="text-white text-2xl font-bold">
-                {data?.title}
+              <Text
+                className="text-white text-2xl font-bold w-[300px]"
+                numberOfLines={2}
+              >
+                {data.volumeInfo.title}
               </Text>
-              <Text className="text-white">{data?.authors.join(', ')}</Text>
+              <Text className="text-white">
+                {data.volumeInfo.authors?.join(', ')}
+              </Text>
             </View>
           </View>
         </View>
@@ -97,41 +93,49 @@ const BookDetail = () => {
               Categories
             </Text>
             <View className="flex-row flex-wrap">
-              {data?.categories?.map(category => (
-                <Text
+              {data.volumeInfo.categories?.slice(0, 2).map(category => (
+                <View
+                  className="rounded-full bg-gray-700 px-3 py-1 mr-2 mb-2"
                   key={category}
-                  className="text-white mr-2 mb-2 px-2 py-1 bg-gray-800 rounded"
                 >
-                  {category}
-                </Text>
+                  <Text className="text-white">{category}</Text>
+                </View>
               ))}
             </View>
           </View>
           <View className="flex-row justify-between mb-4">
-            <View className="rounded-full px-3 py-1 flex-row items-center">
+            <View className="rounded-full py-1 flex-row items-center">
               {[1, 2, 3, 4, 5].map(star => (
                 <Text className="text-yellow-400" key={star}>
-                  {star <= Math.round(data?.averageRating ?? 0) ? '★' : '☆'}
+                  {star <= Math.round(data.volumeInfo.averageRating ?? 0)
+                    ? '★'
+                    : '☆'}
                 </Text>
               ))}
               <Text className="text-white ml-1 font-bold">
-                {data?.averageRating ? data.averageRating.toFixed(1) : 'N/A'}
+                {data.volumeInfo.averageRating
+                  ? data.volumeInfo.averageRating.toFixed(1)
+                  : 'N/A'}
               </Text>
             </View>
             <View className="flex-row items-center">
               <Text className="text-white ml-1">
-                Published: {formatDate(data?.publishedDate)}
+                Published: {formatDate(data.volumeInfo.publishedDate)}
               </Text>
             </View>
           </View>
-          <View className="flex-row items-center">
-            <Text className="text-white ml-1">Page: {data?.pageCount}</Text>
-          </View>
+          {data.volumeInfo.pageCount && (
+            <View className="mb-4">
+              <Text className="text-xl font-bold text-white mb-2">
+                Reading Progress
+              </Text>
+            </View>
+          )}
           <View className="mb-4">
             <Text className="text-xl font-bold text-white mb-2">
               Description
             </Text>
-            <Text className="text-white">{data?.description}</Text>
+            <Text className="text-white">{data.volumeInfo.description}</Text>
           </View>
         </View>
       </ScrollView>
