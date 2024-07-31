@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import {
   deleteGameFromMyGames,
   fetchGameDetail,
@@ -11,6 +11,7 @@ import {
 import { COVER_BASE_URL, SCREENSHOT_BASE_URL } from '../../config';
 import { GameNav } from '../../components/games/gameNav';
 import { Game } from '../../API/typesFile';
+import { arrowLeftIconLight } from '../../assets/icons';
 
 export const storeNames: { [key: number]: string } = {
   13: 'Steam',
@@ -77,11 +78,15 @@ const GameDetail = () => {
     <SafeAreaView className="flex-1 bg-gray-900">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative">
+          <TouchableOpacity className="" onPress={() => router.back()}>
+            {arrowLeftIconLight}
+          </TouchableOpacity>
           <Image
             source={{ uri: `${COVER_BASE_URL}${data?.cover?.image_id}.jpg` }}
             className="w-full h-64 opacity-25"
             resizeMode="cover"
           />
+
           <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
             <Image
               source={{ uri: `${COVER_BASE_URL}${data?.cover?.image_id}.jpg` }}

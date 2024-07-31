@@ -9,11 +9,9 @@ import {
 } from '../../API/movieAPI';
 import { IMAGE_BASE_URL } from '../../config';
 import {
-  arrowLeftIcon,
+  arrowLeftIconLight,
   calendarIcon,
-  clockIcon,
-  closeIcon,
-  starIcon
+  clockIcon
 } from '../../assets/icons';
 import { MovieNav } from '../../components/movies/movieNav';
 
@@ -61,10 +59,10 @@ const MovieDetail = () => {
             resizeMode="cover"
           />
           <View className="absolute top-4 left-4 right-4 flex-row justify-between">
-            <TouchableOpacity onPress={() => router.back()}>
-              {arrowLeftIcon}
+            <TouchableOpacity className="" onPress={() => router.back()}>
+              {arrowLeftIconLight}
             </TouchableOpacity>
-            <TouchableOpacity>{closeIcon}</TouchableOpacity>
+            {/* <TouchableOpacity>{closeIcon}</TouchableOpacity> */}
           </View>
           <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
             <Image

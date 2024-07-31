@@ -83,6 +83,9 @@ const noteIconOrange = (
   <MaterialCommunityIcons name="note-outline" size={24} color="#e6a139" />
 );
 const arrowLeftIcon = <AntDesign name="arrowleft" size={24} color="black" />;
+const arrowLeftIconLight = (
+  <AntDesign name="arrowleft" size={24} color="#f1f5f9" />
+);
 const arrowRightIcon = <AntDesign name="arrowright" size={24} color="black" />;
 const arrowDownIcon = <AntDesign name="arrowdown" size={24} color="black" />;
 const arrowUpIcon = <AntDesign name="arrowup" size={24} color="black" />;
@@ -140,5 +143,6 @@ export {
   bellIconOrange,
   eyeHideIconOrange,
   bookmarkIconOrange,
-  listIconOrange
+  listIconOrange,
+  arrowLeftIconLight
 };

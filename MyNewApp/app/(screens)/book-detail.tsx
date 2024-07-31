@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import {
   deleteBookFromMyBooks,
   fetchBookDetail,
@@ -10,6 +10,7 @@ import {
 } from '../../API/bookAPI';
 import { BookNav } from '../../components/books/bookNav';
 import { Book } from '../../API/typesFile';
+import { arrowLeftIconLight } from '../../assets/icons';
 
 const BookDetail = () => {
   const [data, setData] = useState<Book | null>(null);
@@ -62,6 +63,9 @@ const BookDetail = () => {
     <SafeAreaView className="flex-1 bg-gray-900">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="relative">
+          <TouchableOpacity className="" onPress={() => router.back()}>
+            {arrowLeftIconLight}
+          </TouchableOpacity>
           <Image
             source={{ uri: data.volumeInfo.imageLinks?.thumbnail }}
             className="w-full h-64  opacity-25"
