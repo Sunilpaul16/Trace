@@ -4,6 +4,7 @@ import {
   POPULAR_BOOKS_API_URL,
   PORT_BOOKS
 } from '../config';
+import { Book } from './typesFile';
 
 export const fetchBooks = async () => {
   try {
@@ -34,27 +35,11 @@ export const fetchBookDetail = async (id: string) => {
   }
 };
 
-export type Book = {
-  id: string;
-  volumeInfo: {
-    title: string;
-    authors: string[];
-    publishedDate: string;
-    description: string;
-    imageLinks: {
-      thumbnail?: string;
-    };
-    averageRating?: number;
-    categories?: string[];
-    pageCount?: number;
-  };
-};
-
 export const getMyBooks = async (): Promise<Book[] | undefined> => {
   try {
     const response = await fetch(PORT_BOOKS);
     const data = await response.json();
-    console.log('Books:');
+    console.log('getMyBooks: success');
     return data;
   } catch (error) {
     console.log('Error getting Books', error);

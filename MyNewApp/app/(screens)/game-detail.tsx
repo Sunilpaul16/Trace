@@ -5,12 +5,12 @@ import { useLocalSearchParams } from 'expo-router';
 import {
   deleteGameFromMyGames,
   fetchGameDetail,
-  Game,
   postMyGame,
   getMyGames
 } from '../../API/gameAPI';
 import { COVER_BASE_URL, SCREENSHOT_BASE_URL } from '../../config';
 import { GameNav } from '../../components/games/gameNav';
+import { Game } from '../../API/typesFile';
 
 export const storeNames: { [key: number]: string } = {
   13: 'Steam',
@@ -88,7 +88,7 @@ const GameDetail = () => {
               className="w-24 h-36 rounded-lg"
             />
             <View className="ml-4 mb-2">
-              <Text className="text-white text-2xl font-bold flex-1 flex-shrink">
+              <Text className="text-white text-2xl font-bold w-[300px]">
                 {data?.name}
               </Text>
             </View>

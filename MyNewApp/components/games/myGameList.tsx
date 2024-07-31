@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
-import { getMyGames, Game } from '../../API/gameAPI';
+import { getMyGames } from '../../API/gameAPI';
 import { COVER_BASE_URL } from '../../config';
+import { Game } from '../../API/typesFile';
 
 const MyGamesList = () => {
   const [games, setGames] = useState<Game[]>([]);

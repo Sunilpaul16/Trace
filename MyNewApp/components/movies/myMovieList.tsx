@@ -4,12 +4,7 @@ import { getMyMovies } from '../../API/movieAPI';
 import { useRouter } from 'expo-router';
 import { IMAGE_BASE_URL } from '../../config';
 
-type Movie = {
-  id: number;
-  title: string;
-  poster_path: string;
-};
-
+import { Movie } from '../../API/typesFile';
 const MyMoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const router = useRouter();

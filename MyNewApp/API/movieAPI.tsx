@@ -4,6 +4,7 @@ import {
   POPULAR_MOVIES_API_URL,
   PORT_MOVIES
 } from '../config';
+import { Movie } from './typesFile';
 
 export const fetchMovies = async () => {
   try {
@@ -30,19 +31,7 @@ export const fetchMovieDetail = async (id: any) => {
     console.log('Failed to fetch movie details:', error);
   }
 };
-export type Movie = {
-  id: number;
-  title: string;
-  release_date: string;
-  releaseDate: string;
-  vote_average: number;
-  vote_count: number;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-  runtime: number;
-  genres: { name: string }[];
-};
+
 export const getMyMovies = async () => {
   try {
     const response = await fetch(PORT_MOVIES);

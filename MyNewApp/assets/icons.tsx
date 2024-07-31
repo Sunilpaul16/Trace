@@ -9,6 +9,9 @@ import {
 
 const eyeShowIcon = <AntDesign name="eye" size={24} color="grey" />;
 const eyeHideIcon = <Entypo name="eye-with-line" size={24} color="grey" />;
+const eyeHideIconOrange = (
+  <Entypo name="eye-with-line" size={24} color="#e6a139" />
+);
 const inactiveHomeIcon = <Entypo name="home" size={24} color="white" />;
 const activeHomeIcon = <Entypo name="home" size={24} color="#e6a139" />;
 const inactiveBookIcon = <AntDesign name="book" size={24} color="white" />;
@@ -26,7 +29,7 @@ const inactiveMovieIcon = (
 const activeMovieIcon = (
   <MaterialCommunityIcons name="movie-open-outline" size={24} color="#e6a139" />
 );
-const searchIcon = <AntDesign name="search1" size={24} color="white" />;
+const searchIcon = <AntDesign name="search1" size={24} color="black" />;
 
 const steamIcon = <FontAwesome5 name="steam" size={24} color="black" />;
 const epicIcon = <FontAwesome5 name="epic-games" size={24} color="black" />;
@@ -52,17 +55,32 @@ const calendarIcon = <AntDesign name="calendar" size={24} color="white" />;
 const bellIcon = (
   <MaterialCommunityIcons name="bell-outline" size={24} color="white" />
 );
+const bellIconOrange = (
+  <MaterialCommunityIcons name="bell-outline" size={24} color="#e6a139" />
+);
 const bookmarkIcon = (
   <MaterialCommunityIcons name="bookmark-outline" size={24} color="white" />
+);
+const bookmarkIconOrange = (
+  <MaterialCommunityIcons name="bookmark-outline" size={24} color="#e6a139" />
 );
 const listIcon = (
   <MaterialCommunityIcons name="playlist-plus" size={24} color="white" />
 );
+const listIconOrange = (
+  <MaterialCommunityIcons name="playlist-plus" size={24} color="#e6a139" />
+);
 const watchedIcon = (
   <MaterialCommunityIcons name="eye-check-outline" size={24} color="white" />
 );
+const watchedIconOrange = (
+  <MaterialCommunityIcons name="eye-check-outline" size={24} color="#e6a139" />
+);
 const noteIcon = (
   <MaterialCommunityIcons name="note-outline" size={24} color="white" />
+);
+const noteIconOrange = (
+  <MaterialCommunityIcons name="note-outline" size={24} color="#e6a139" />
 );
 const arrowLeftIcon = <AntDesign name="arrowleft" size={24} color="black" />;
 const arrowRightIcon = <AntDesign name="arrowright" size={24} color="black" />;
@@ -116,5 +134,11 @@ export {
   cameraIcon,
   crossIcon,
   activeHomeIcon,
-  inactiveHomeIcon
+  inactiveHomeIcon,
+  noteIconOrange,
+  watchedIconOrange,
+  bellIconOrange,
+  eyeHideIconOrange,
+  bookmarkIconOrange,
+  listIconOrange
 };

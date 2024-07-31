@@ -5,25 +5,8 @@ import {
   GAME_ACCESS_TOKEN,
   PORT_GAMES_2
 } from '../config';
+import { Game } from './typesFile';
 
-export type Game = {
-  id: number;
-  name: string;
-  cover?: {
-    image_id: string;
-  };
-  aggregated_rating?: number;
-  first_release_date?: number;
-  summary?: string;
-  storyline?: string;
-  platforms?: { name: string }[];
-  involved_companies?: { company: { name: string } }[];
-  game_modes?: { name: string }[];
-  rating_count?: number;
-  total_rating_count?: number;
-  screenshots?: { image_id: string }[];
-  websites?: { category: number; url: string }[];
-};
 export const fetchGames = async () => {
   const currentDate = Math.floor(Date.now() / 1000);
   const oneYearAgo = currentDate - 365 * 24 * 60 * 60;
@@ -40,7 +23,7 @@ export const fetchGames = async () => {
       & aggregated_rating != null
       & cover != null;
       sort aggregated_rating desc;
-      limit 100;`
+      limit 10;`
     });
 
     if (!response.ok) {

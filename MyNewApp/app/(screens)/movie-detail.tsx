@@ -16,8 +16,8 @@ import {
   starIcon
 } from '../../assets/icons';
 import { MovieNav } from '../../components/movies/movieNav';
-import { Movie } from '../../API/movieAPI';
 
+import { Movie } from '../../API/typesFile';
 const MovieDetail = () => {
   const [data, setData] = useState<Movie | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -72,7 +72,7 @@ const MovieDetail = () => {
               className="w-24 h-36 rounded-lg"
             />
             <View className="ml-4 mb-2">
-              <Text className="text-white text-2xl font-bold">
+              <Text className="text-white text-2xl font-bold w-[300px]">
                 {data?.title}
               </Text>
             </View>
