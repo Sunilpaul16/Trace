@@ -15,7 +15,7 @@ import { Entypo } from '@expo/vector-icons';
 const SignUp = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   return (
-    <SafeAreaView className="bg-gray-900">
+    <SafeAreaView className="bg-gray-900 h-full">
       <ScrollView contentContainerStyle={{ height: '100%' }}>
         <View className="w-full h-full justify-center px-6 bg-slategray bg-gray-900">
           <View>
@@ -68,9 +68,9 @@ const SignUp = () => {
             containerStyles="bg-orange-400 w-full h-[40px] rounded-lg mt-4  flex items-center justify-center"
             textStyles={undefined}
           />
-          <Text className="my-3 text-white">Forgot Password?</Text>
+          <Text className="my-3 mt-3 text-white">Forgot Password?</Text>
           <Text className="my-3 text-white">
-            Already have an account?
+            Already have an account?{' '}
             <Link href="/signin" className="text-orange-400">
               Sign-Up
             </Link>

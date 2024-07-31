@@ -15,9 +15,14 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <SafeAreaView className="h-full bg-gray-900">
+    <SafeAreaView className=" bg-gray-900 h-full">
       <ScrollView contentContainerStyle={{ height: '100%' }}>
         <View className="w-full h-full justify-center px-6 bg-slategray bg-gray-900">
+          <View className="pb-4">
+            <Text className="text-2xl text-white font-semibold mt-10 ">
+              Log in to Trace
+            </Text>
+          </View>
           <Text className="text-2xl text-white">Email</Text>
           <TextInput
             className="border-2 h-[45px] border-gray-400 rounded-lg p-3 my-3   text-white"
