@@ -1,41 +1,40 @@
-import { Text, View, ScrollView, Image, StatusBar } from 'react-native';
+import { Text, View, ScrollView, Image } from 'react-native';
 import { Link, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../components/ui/ButtonComponent';
+import { StatusBar } from 'expo-status-bar';
 
 export default function Trace() {
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
-      <ScrollView contentContainerStyle={{ height: '100%' }}>
-        <View className="w-full justify-center items-center min-h-[85vh] px-4 ">
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View className="w-full flex justify-center items-center px-4 py-8">
           <Image
             source={require('../assets/t2.png')}
             resizeMode="contain"
-            className="w-[130px] h-[85px] mt-8 "
+            className="w-[130px] h-[84px] mt-8"
           />
           <Image
             source={require('../assets/index.png')}
-            className="max-w-[380px] w-full h-[300px] mt-8 rounded-2xl"
-            resizeMode="cover"
+            className="max-w-[360px] w-full h-[280px] mt-8 rounded-2xl"
+            resizeMode="contain"
           />
           <View className="mt-8">
-            <Text className="text-3xl text-white font-bold text-center mt-9">
+            <Text className="text-3xl text-white font-bold text-center">
               Unlock the story of your virtual life with{' '}
               <Text className="text-orange-400">Trace</Text>
             </Text>
           </View>
-          <View className="mt-4">
-            <Text className="font-semibold font-regular text-gray-100 text-center mt-4">
-              Discover insights, patterns, and hidden gems in your digital
-              adventures
-            </Text>
-          </View>
-          <View className="mt-8">
+          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
+            Discover insights, patterns, and hidden gems in your digital
+            adventures
+          </Text>
+          <View className="mt-8 w-full">
             <CustomButton
               title="Continue with Email"
               handlePress={() => router.push('/signin')}
               textStyles="text-white outline-gray-600 font-semibold"
-              containerStyles={undefined}
+              containerStyles="w-full"
             />
           </View>
         </View>

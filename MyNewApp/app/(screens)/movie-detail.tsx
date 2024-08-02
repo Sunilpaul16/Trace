@@ -62,7 +62,6 @@ const MovieDetail = () => {
             <TouchableOpacity className="" onPress={() => router.back()}>
               {arrowLeftIconLight}
             </TouchableOpacity>
-            {/* <TouchableOpacity>{closeIcon}</TouchableOpacity> */}
           </View>
           <View className="absolute bottom-0 left-4 right-4 flex-row items-end">
             <Image

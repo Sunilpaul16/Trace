@@ -29,7 +29,7 @@ const TabsLayout = () => {
           tabBarLabelStyle: { display: 'none' },
 
           headerShown: false,
-          tabBarIcon: ({ focused, color }) =>
+          tabBarIcon: ({ focused}) =>
             focused ? activeHomeIcon : inactiveHomeIcon,
           tabBarLabel: 'Home'
         }}
@@ -40,7 +40,7 @@ const TabsLayout = () => {
           tabBarLabelStyle: { display: 'none' },
 
           headerShown: false,
-          tabBarIcon: ({ focused, color }) =>
+          tabBarIcon: ({ focused}) =>
             focused ? activeBookIcon : inactiveBookIcon,
 
           tabBarLabel: 'Books'
@@ -52,7 +52,7 @@ const TabsLayout = () => {
           tabBarLabelStyle: { display: 'none' },
 
           headerShown: false,
-          tabBarIcon: ({ focused, color }) =>
+          tabBarIcon: ({ focused }) =>
             focused ? activeGameIcon : inactiveGameIcon,
           tabBarLabel: 'Games'
         }}
@@ -62,7 +62,7 @@ const TabsLayout = () => {
         options={{
           tabBarLabelStyle: { display: 'none' },
           headerShown: false,
-          tabBarIcon: ({ focused, color }) =>
+          tabBarIcon: ({ focused}) =>
             focused ? activeMovieIcon : inactiveMovieIcon
         }}
       />
