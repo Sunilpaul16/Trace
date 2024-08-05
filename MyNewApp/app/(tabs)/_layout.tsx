@@ -38,11 +38,9 @@ const TabsLayout = () => {
         name="books"
         options={{
           tabBarLabelStyle: { display: 'none' },
-
           headerShown: false,
           tabBarIcon: ({ focused}) =>
             focused ? activeBookIcon : inactiveBookIcon,
-
           tabBarLabel: 'Books'
         }}
       />
@@ -50,7 +48,6 @@ const TabsLayout = () => {
         name="games"
         options={{
           tabBarLabelStyle: { display: 'none' },
-
           headerShown: false,
           tabBarIcon: ({ focused }) =>
             focused ? activeGameIcon : inactiveGameIcon,

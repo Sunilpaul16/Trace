@@ -1,5 +1,3 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
 # dependencies
 node_modules/
 
@@ -29,9 +27,32 @@ yarn-error.*
 *.pem
 
 # local env files
-.env*.local
+.env
+*.env
+MyNewApp/.env
 
 # typescript
 *.tsbuildinfo
 
-config.js
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Temporary files
+*.log
+*.tmp
+*.temp
+
+# Build files
+android/app/build/
+ios/build/
+
+# Expo OTA updates
+.expo-shared/
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+GoogleService-Info.plist

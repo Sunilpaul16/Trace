@@ -1,5 +1,5 @@
 import { Text, View, ScrollView, Image } from 'react-native';
-import { Link, router } from 'expo-router';
+import { router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CustomButton from '../components/ui/ButtonComponent';
 import { StatusBar } from 'expo-status-bar';
@@ -10,12 +10,12 @@ export default function Trace() {
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View className="w-full flex justify-center items-center px-4 py-8">
           <Image
-            source={require('../assets/t2.png')}
+            source={require('../assets/logo.png')}
             resizeMode="contain"
             className="w-[130px] h-[84px] mt-8"
           />
           <Image
-            source={require('../assets/index.png')}
+            source={require('../assets/onboarding.png')}
             className="max-w-[360px] w-full h-[280px] mt-8 rounded-2xl"
             resizeMode="contain"
           />

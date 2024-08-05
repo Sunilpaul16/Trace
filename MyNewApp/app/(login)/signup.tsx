@@ -19,7 +19,7 @@ const SignUp = () => {
       <ScrollView contentContainerStyle={{ height: '100%' }}>
         <View className="w-full justify-center items-center min-h-[85vh] px-4 ">
           <Image
-            source={require('../../assets/t2.png')}
+            source={require('../../assets/logo.png')}
             resizeMode="contain"
             className="w-[115px] h-[85px]"
           />

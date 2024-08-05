@@ -8,7 +8,7 @@ import {
   postMyGame,
   getMyGames
 } from '../../API/gameAPI';
-import { COVER_BASE_URL, SCREENSHOT_BASE_URL } from '../../config';
+import { COVER_BASE_URL } from '../../config';
 import { GameNav } from '../../components/games/gameNav';
 import { Game } from '../../API/typesFile';
 import { arrowLeftIconLight } from '../../assets/icons';
