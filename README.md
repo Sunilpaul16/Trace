@@ -1,5 +1,8 @@
 # Welcome to Trace!
 
+ Trace, a mobile app that centralizes all your virtual activities—books, games, movies—allowing
+ users to keep track of everything in one convenient place
+
 This project is set up with Expo and can be run with a few simple commands.
 
 ## Getting Started
