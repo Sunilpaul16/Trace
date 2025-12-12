@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { fetchMovies } from '../../API/movieAPI';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
@@ -9,6 +9,7 @@ import { Movie } from '../../API/typesFile';
 
 const GetMovies = () => {
   const [data, setData] = useState<Movie[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,6 +19,8 @@ const GetMovies = () => {
         setData(movies);
       } catch (error) {
         console.log(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getMovies();
@@ -69,6 +72,11 @@ const GetMovies = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ padding: 7 }}
+        ListEmptyComponent={
+          isLoading
+            ? <ActivityIndicator color="#fb923c" size="large" style={{ marginTop: 40 }} />
+            : <Text className="text-gray-400 text-center mt-10">No movies found</Text>
+        }
         ListHeaderComponent={
           <>
             <Text className="text-4xl text-orange-400 justify-center text-center font-bold -mt-2 ">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { fetchGames } from '../../API/gameAPI';
-import { View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
+import { ActivityIndicator, View, Text, FlatList, TouchableOpacity, Image } from 'react-native';
 import { COVER_BASE_URL } from '../../config';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import GameSearch from './GameSearch';
@@ -9,6 +9,7 @@ import { Game } from '../../API/typesFile';
 
 const GetGames = () => {
   const [games, setGames] = useState<Game[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,6 +19,8 @@ const GetGames = () => {
         setGames(games);
       } catch (error) {
         console.log('Error fetching games:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getGames();
@@ -64,6 +67,11 @@ const GetGames = () => {
         keyExtractor={({ id }) => id.toString()}
         renderItem={renderItem}
         contentContainerStyle={{ padding: 7 }}
+        ListEmptyComponent={
+          isLoading
+            ? <ActivityIndicator color="#fb923c" size="large" style={{ marginTop: 40 }} />
+            : <Text className="text-gray-400 text-center mt-10">No games found</Text>
+        }
         ListHeaderComponent={
           <>
             <View>

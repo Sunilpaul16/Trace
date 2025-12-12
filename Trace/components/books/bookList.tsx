@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { fetchBooks } from '../../API/bookAPI';
@@ -9,6 +9,7 @@ import BookSearch from './BookSearch';
 
 const GetBooks = () => {
   const [data, setData] = useState<Book[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
@@ -18,6 +19,8 @@ const GetBooks = () => {
         setData(response);
       } catch (error) {
         console.log('Error fetching books:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     getBooks();
@@ -63,6 +66,11 @@ const GetBooks = () => {
         keyExtractor={({ id }) => id}
         renderItem={renderItem}
         contentContainerStyle={{ padding: 7 }}
+        ListEmptyComponent={
+          isLoading
+            ? <ActivityIndicator color="#fb923c" size="large" style={{ marginTop: 40 }} />
+            : <Text className="text-gray-400 text-center mt-10">No books found</Text>
+        }
         ListHeaderComponent={
           <>
             <View>
