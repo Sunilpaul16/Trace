@@ -32,8 +32,8 @@ const BookSearch = () => {
           style={{ width: 50, height: 75, marginRight: 10 }}
         />
         <View>
-          <Text>{item.volumeInfo.title}</Text>
-          <Text>{item.volumeInfo.authors?.join(', ')}</Text>
+          <Text className="text-white">{item.volumeInfo.title}</Text>
+          <Text className="text-gray-300">{item.volumeInfo.authors?.join(', ')}</Text>
         </View>
       </View>
     </TouchableOpacity>

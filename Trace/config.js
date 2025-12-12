@@ -16,9 +16,10 @@ const MY_BOOK_API_KEY = Constants.expoConfig.extra.bookApiKey;
 const BOOK_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/';
 const POPULAR_BOOKS_API_URL = `https://www.googleapis.com/books/v1/volumes?q=harry+potter&maxResults=10&key=${MY_BOOK_API_KEY}`; //herry potter
 
-const PORT_BOOKS = `http://10.0.2.2:3000/books`;
-const PORT_MOVIES = `http://10.0.2.2:3000/movies`;
-const PORT_GAMES = `http://10.0.2.2:3000/games`;
+const host = Constants.expoConfig?.hostUri?.split(':')[0] ?? '10.0.2.2';
+const PORT_BOOKS = `http://${host}:3000/books`;
+const PORT_MOVIES = `http://${host}:3000/movies`;
+const PORT_GAMES = `http://${host}:3000/games`;
 
 
 export {

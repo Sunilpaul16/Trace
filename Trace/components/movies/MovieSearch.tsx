@@ -8,7 +8,7 @@ import {
   TextInput
 } from 'react-native';
 import { router } from 'expo-router';
-import { MOVIE_API_KEY } from '../../config';
+import { MOVIE_API_KEY, IMAGE_BASE_URL } from '../../config';
 import { searchIcon, crossIcon, micIcon, cameraIcon } from '../../assets/icons';
 import { Movie } from '../../API/typesFile';
 
@@ -21,7 +21,7 @@ const MovieSearch = () => {
       `https://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${searchQuery}`
     );
     const data = await response.json();
-    setSearchResults(data.items || []);
+    setSearchResults(data.results || []);
   };
 
   const renderMovieItem = ({ item }: { item: Movie }) => (
@@ -30,7 +30,7 @@ const MovieSearch = () => {
     >
       <View style={{ flexDirection: 'row', padding: 10 }}>
         <Image
-          source={{ uri: item.poster_path }}
+          source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
           style={{ width: 50, height: 75, marginRight: 10 }}
         />
         <View>
