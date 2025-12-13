@@ -14,7 +14,7 @@ const SCREENSHOT_BASE_URL = 'https://api.igdb.com/v4/screenshots';
 // Books
 const MY_BOOK_API_KEY = Constants.expoConfig.extra.bookApiKey;
 const BOOK_BASE_URL = 'https://www.googleapis.com/books/v1/volumes/';
-const POPULAR_BOOKS_API_URL = `https://www.googleapis.com/books/v1/volumes?q=harry+potter&maxResults=10&key=${MY_BOOK_API_KEY}`; //herry potter
+const POPULAR_BOOKS_API_URL = `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&orderBy=relevance&maxResults=10&key=${MY_BOOK_API_KEY}`;
 
 const host = Constants.expoConfig?.hostUri?.split(':')[0] ?? '10.0.2.2';
 const PORT_BOOKS = `http://${host}:3000/books`;
