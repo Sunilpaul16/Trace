@@ -5,6 +5,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import {
   deleteMovieFromMyMovies,
   fetchMovieDetail,
+  getMyMovies,
   postMyMovies
 } from '../../API/movieAPI';
 import { IMAGE_BASE_URL } from '../../config';
@@ -16,6 +17,10 @@ import {
 import { MovieNav } from '../../components/movies/movieNav';
 
 import { Movie } from '../../API/typesFile';
+
+interface SavedMovie {
+  id: number;
+}
 const MovieDetail = () => {
   const [data, setData] = useState<Movie | null>(null);
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -24,12 +29,17 @@ const MovieDetail = () => {
   useEffect(() => {
     if (id) {
       fetchMovieDetail(id)
-        .then(json => setData(json))
+        .then((json: Movie) => setData(json))
         .catch(error => console.log('Failed to fetch movie details:', error));
+      getMyMovies()
+        .then((saved: SavedMovie[] | undefined) =>
+          setIsSaved(saved?.some((movie: SavedMovie) => movie.id === Number(id)) ?? false)
+        )
+        .catch(() => {});
     }
   }, [id]);
 
-  const handleSaveMovie = async () => {
+  const handleSaveMovie = async (): Promise<void> => {
     if (data) {
       try {
         if (isSaved) {
@@ -84,7 +94,7 @@ const MovieDetail = () => {
         <View className="mb-4">
           <Text className="text-xl font-bold text-white mb-2 p-3">Genres</Text>
           <View className="flex-row flex-wrap p-2">
-            {data?.genres.map(genre => (
+            {data?.genres?.map(genre => (
               <View
                 key={genre.name}
                 className="bg-gray-800 rounded-full px-3 py-1 mr-2 mb-2"
@@ -106,7 +116,9 @@ const MovieDetail = () => {
             </View>
             <View className=" rounded-full px-3 py-1 flex-row items-center">
               {clockIcon}
-              {/* <Text className="text-white ml-1">{Math.floor(data.runtime / 60)}h {data?.runtime !== undefined ? data?.runtime : 0}m</Text> */}
+              <Text className="text-white ml-1">
+                {data?.runtime ? `${Math.floor(data.runtime / 60)}h ${data.runtime % 60}m` : ''}
+              </Text>
             </View>
             <View className="flex-row items-center">
               {calendarIcon}
