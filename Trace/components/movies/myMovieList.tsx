@@ -1,31 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { getMyMovies } from '../../API/movieAPI';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { IMAGE_BASE_URL } from '../../config';
-
 import { Movie } from '../../API/typesFile';
+
 const MyMoviesList = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const fetchedMovies = await getMyMovies();
-        console.log('Fetched movies in component:');
-        setMovies(fetchedMovies);
-      } catch (error) {
-        console.log('Error fetching movies:', error);
-      }
-    };
-    fetchMovies();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      const fetchMovies = async () => {
+        try {
+          const fetchedMovies = await getMyMovies();
+          setMovies(fetchedMovies ?? []);
+        } catch (error) {
+          console.log('Error fetching movies:', error);
+        }
+      };
+      fetchMovies();
+    }, [])
+  );
 
   const renderItem = ({ item }: { item: Movie }) => (
-    <TouchableOpacity
-      onPress={() => router.push(`/movie-detail?id=${item.id}`)}
-    >
+    <TouchableOpacity onPress={() => router.push(`/movie-detail?id=${item.id}`)}>
       <View className="mr-4 mb-2">
         {item.poster_path ? (
           <>
@@ -33,10 +32,7 @@ const MyMoviesList = () => {
               source={{ uri: `${IMAGE_BASE_URL}${item.poster_path}` }}
               className="h-[150px] w-[100px] rounded-lg"
             />
-            <Text
-              className="text-sm font-bold text-white mt-1 w-[100px]"
-              numberOfLines={2}
-            >
+            <Text className="text-sm font-bold text-white mt-1 w-[100px]" numberOfLines={2}>
               {item.title}
             </Text>
           </>
@@ -56,6 +52,10 @@ const MyMoviesList = () => {
       renderItem={renderItem}
       horizontal
       showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ paddingHorizontal: 16 }}
+      ListEmptyComponent={
+        <Text className="text-gray-500 text-sm px-4">Nothing saved yet</Text>
+      }
     />
   );
 };
