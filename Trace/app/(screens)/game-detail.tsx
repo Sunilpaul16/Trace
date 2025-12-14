@@ -42,15 +42,12 @@ const GameDetail = () => {
     if (id) {
       fetchGameDetail(Number(id))
         .then(json => setData(json))
-        .catch(error => console.log('Failed to fetch game details:'));
+        .catch(error => console.error('Failed to fetch game details:', error));
       getMyGames()
         .then(savedGames => {
-          const isGameSaved = savedGames.some(
-            (game: { id: number }) => game.id === Number(id)
-          );
-          setIsSaved(isGameSaved);
+          setIsSaved(savedGames.some((game: { id: number }) => game.id === Number(id)));
         })
-        .catch(error => console.log('Failed to check if game is saved:'));
+        .catch(() => {});
     }
   }, [id]);
 

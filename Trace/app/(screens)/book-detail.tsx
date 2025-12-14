@@ -55,9 +55,7 @@ const BookDetail = () => {
     return new Date(dateString).toLocaleDateString();
   };
 
-  if (!data) {
-    return <Text>Loading...</Text>;
-  }
+  if (!data) return null;
 
   return (
     <SafeAreaView className="flex-1 bg-gray-900">
@@ -128,13 +126,6 @@ const BookDetail = () => {
               </Text>
             </View>
           </View>
-          {data.volumeInfo.pageCount && (
-            <View className="mb-4">
-              <Text className="text-xl font-bold text-white mb-2">
-                Reading Progress
-              </Text>
-            </View>
-          )}
           <View className="mb-4">
             <Text className="text-xl font-bold text-white mb-2">
               Description

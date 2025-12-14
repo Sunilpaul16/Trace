@@ -44,17 +44,13 @@ const MovieDetail = () => {
       try {
         if (isSaved) {
           await deleteMovieFromMyMovies(data.id);
-          console.log('Movie removed successfully:', data.id);
           setIsSaved(false);
         } else {
-          console.log('Attempting to save movie:');
           await postMyMovies(data);
-          console.log('Movie saved successfully');
           setIsSaved(true);
         }
       } catch (error) {
-        console.log(data);
-        console.log('Failed to save/remove movie:', error);
+        console.error('Failed to save/remove movie:', error);
       }
     }
   };
