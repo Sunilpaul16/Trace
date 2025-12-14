@@ -48,11 +48,11 @@ const GetBooks = () => {
           </View>
           <View className="p-2 rounded">
             <Text className="text-white text-lg">
-              Ratings: {item.volumeInfo.averageRating}
+              Rating: {item.volumeInfo.averageRating ?? 'N/A'}
             </Text>
           </View>
           <View className="p-2 rounded">
-            <Text className="text-lg text-white">Details</Text>
+            <Text className="text-gray-400 text-sm">{item.volumeInfo.authors?.join(', ')}</Text>
           </View>
         </View>
       </View>

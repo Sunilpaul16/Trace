@@ -54,11 +54,11 @@ const GetMovies = () => {
           </View>
           <View className="p-2 rounded">
             <Text className="text-white text-lg">
-              Ratings: {item.vote_average}
+              Rating: {item.vote_average?.toFixed(1)}
             </Text>
           </View>
-          <View className=" p-2 rounded">
-            <Text className="text-lg text-white">Details</Text>
+          <View className="p-2 rounded">
+            <Text className="text-gray-400 text-sm">{item.release_date?.slice(0, 4)}</Text>
           </View>
         </View>
       </View>

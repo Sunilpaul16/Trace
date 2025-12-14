@@ -50,11 +50,13 @@ const GetGames = () => {
           </View>
           <View className="p-2 rounded">
             <Text className="text-white text-lg">
-              Ratings: {item.aggregated_rating}
+              Rating: {item.aggregated_rating ? item.aggregated_rating.toFixed(1) : 'N/A'}
             </Text>
           </View>
-          <View className=" p-2 rounded">
-            <Text className="text-lg text-white">Details</Text>
+          <View className="p-2 rounded">
+            <Text className="text-gray-400 text-sm">
+              {item.platforms?.slice(0, 2).map(p => p.name).join(' · ')}
+            </Text>
           </View>
         </View>
       </View>
