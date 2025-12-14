@@ -41,7 +41,7 @@ const BookSearch = () => {
 
   return (
     <View className="flex-1 ">
-      <View className="m-1 bg-gray-200 rounded-3xl shadow-md flex-row items-center">
+      <View className="m-1 bg-white rounded-full shadow-md flex-row items-center">
         <TouchableOpacity className="p-3">{searchIcon}</TouchableOpacity>
         <TextInput
           value={searchQuery}
