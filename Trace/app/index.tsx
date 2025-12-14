@@ -21,17 +21,16 @@ export default function Trace() {
           />
           <View className="mt-8">
             <Text className="text-3xl text-white font-bold text-center">
-              Unlock the story of your virtual life with{' '}
-              <Text className="text-orange-400">Trace</Text>
+              Everything you've watched, read, and{' '}
+              <Text className="text-orange-400">played.</Text>
             </Text>
           </View>
-          <Text className="text-sm font-pregular text-gray-100 mt-7 text-center">
-            Discover insights, patterns, and hidden gems in your digital
-            adventures
+          <Text className="text-sm text-gray-400 mt-4 text-center">
+            Keep track of it all in one place.
           </Text>
           <View className="mt-8 w-full">
             <CustomButton
-              title="Continue with Email"
+              title="Get Started"
               handlePress={() => router.push('/signin')}
               textStyles="text-white outline-gray-600 font-semibold"
               containerStyles="w-full"
