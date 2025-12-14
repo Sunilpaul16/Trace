@@ -8,7 +8,7 @@ import {
   TextInput
 } from 'react-native';
 import { router } from 'expo-router';
-import { GAME_API_KEY, GAME_ACCESS_TOKEN, GAME_BASE_URL, COVER_BASE_URL } from '../../config';
+import { BACKEND_URL, COVER_BASE_URL } from '../../config';
 import { cameraIcon, micIcon, crossIcon, searchIcon } from '../../assets/icons';
 import { Game } from '../../API/typesFile';
 
@@ -17,15 +17,9 @@ const GameSearch = () => {
   const [searchResults, setSearchResults] = useState<Game[]>([]);
 
   const searchGames = async () => {
-    const response = await fetch(GAME_BASE_URL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Client-ID': GAME_API_KEY,
-        Authorization: `Bearer ${GAME_ACCESS_TOKEN}`
-      },
-      body: `fields name,cover.image_id; search "${searchQuery}"; limit 10;`
-    });
+    const response = await fetch(
+      `${BACKEND_URL}/games/search?q=${encodeURIComponent(searchQuery)}`
+    );
     const data = await response.json();
     setSearchResults(Array.isArray(data) ? data : []);
   };

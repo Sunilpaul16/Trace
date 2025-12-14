@@ -8,7 +8,7 @@ import {
   TextInput
 } from 'react-native';
 import { router } from 'expo-router';
-import { MY_BOOK_API_KEY } from '../../config';
+import { BACKEND_URL } from '../../config';
 import { searchIcon, crossIcon, micIcon, cameraIcon } from '../../assets/icons';
 import { Book } from '../../API/typesFile';
 
@@ -18,10 +18,10 @@ const BookSearch = () => {
 
   const searchBooks = async () => {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchQuery}&key=${MY_BOOK_API_KEY}`
+      `${BACKEND_URL}/books/search?q=${encodeURIComponent(searchQuery)}`
     );
     const data = await response.json();
-    setSearchResults(data.items || []);
+    setSearchResults(Array.isArray(data) ? data : []);
   };
 
   const renderBookItem = ({ item }: { item: Book }) => (

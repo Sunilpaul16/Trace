@@ -27,12 +27,6 @@ export default {
     web: {
       favicon: './assets/splashlogo.png'
     },
-    plugins: ['expo-router'],
-    extra: {
-      movieApiKey: process.env.MOVIE_API_KEY,
-      gameAccessToken: process.env.GAME_ACCESS_TOKEN,
-      gameApiKey: process.env.GAME_API_KEY,
-      bookApiKey: process.env.BOOK_API_KEY
-    }
+    plugins: ['expo-router']
   }
 };
