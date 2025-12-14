@@ -5,6 +5,11 @@ import {
   postMovie,
 } from "./controllers/movies-controllers";
 import {
+  getPopularMovies,
+  getMovieDetail,
+  searchMovies,
+} from "./controllers/browse-movies-controller";
+import {
   getBooks,
   postBook,
   deleteBook,
@@ -13,6 +18,9 @@ import { getGames, postGame, deleteGame } from "./controllers/games-controller";
 
 const router = Router();
 
+router.get("/movies/popular", getPopularMovies);
+router.get("/movies/search", searchMovies);
+router.get("/movies/detail/:id", getMovieDetail);
 router.get("/movies", getMovies);
 router.post("/movies", postMovie);
 router.delete("/movies/:id", deleteMovie);
