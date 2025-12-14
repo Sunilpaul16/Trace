@@ -1,19 +1,11 @@
-import {
-  MY_BOOK_API_KEY,
-  BOOK_BASE_URL,
-  POPULAR_BOOKS_API_URL,
-  PORT_BOOKS
-} from '../config';
+import { BACKEND_URL } from '../config';
 import { Book } from './typesFile';
 
 export const fetchBooks = async () => {
   try {
-    const response = await fetch(POPULAR_BOOKS_API_URL);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const result = await response.json();
-    return result.items;
+    const response = await fetch(`${BACKEND_URL}/books/popular`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
   } catch (error) {
     console.error('Error fetching books:', error);
     return [];
@@ -22,12 +14,8 @@ export const fetchBooks = async () => {
 
 export const fetchBookDetail = async (id: string) => {
   try {
-    const response = await fetch(
-      `${BOOK_BASE_URL}${id}?key=${MY_BOOK_API_KEY}`
-    );
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+    const response = await fetch(`${BACKEND_URL}/books/detail/${id}`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (error) {
     console.log('Failed to fetch book details:', error);
@@ -37,10 +25,8 @@ export const fetchBookDetail = async (id: string) => {
 
 export const getMyBooks = async (): Promise<Book[] | undefined> => {
   try {
-    const response = await fetch(PORT_BOOKS);
-    const data = await response.json();
-    console.log('getMyBooks: success');
-    return data;
+    const response = await fetch(`${BACKEND_URL}/books`);
+    return await response.json();
   } catch (error) {
     console.log('Error getting Books', error);
     throw error;
@@ -49,16 +35,12 @@ export const getMyBooks = async (): Promise<Book[] | undefined> => {
 
 export const postMyBook = async (book: Book): Promise<Book> => {
   try {
-    const response = await fetch(PORT_BOOKS, {
+    const response = await fetch(`${BACKEND_URL}/books`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(book)
     });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     return await response.json();
   } catch (error) {
     console.log('Error creating Book', error);
@@ -68,12 +50,10 @@ export const postMyBook = async (book: Book): Promise<Book> => {
 
 export const deleteBookFromMyBooks = async (id: any): Promise<void> => {
   try {
-    const response = await fetch(`${PORT_BOOKS}/${id}`, {
+    const response = await fetch(`${BACKEND_URL}/books/${id}`, {
       method: 'DELETE'
     });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
   } catch (error) {
     console.log('Error deleting Book', error);
     throw error;
